@@ -1,0 +1,1657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paws &amp; Pets — Accessories with personality</title>
+<meta name="description" content="Paws & Pets makes colourful, playful dog accessories — collars, bandanas, bow ties, leashes, harnesses and name tags with personality.">
+<meta name="theme-color" content="#EC802B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght@1,9..144,500..800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!--
+  ============================================================
+  PAWS & PETS — single-file brand site
+  ------------------------------------------------------------
+  • Everything (CSS, HTML, SVG art, JS) lives in this one file.
+  • Images: Unsplash placeholders. Swap any <img src="..."> for
+    your own WordPress Media Library URLs. If an image ever fails
+    to load, a branded illustrated placeholder appears instead.
+  • Adding products later: any button with
+      data-add-to-cart data-name="Mango Bandana" data-price="899"
+      data-img="https://...jpg"
+    will animate into the cart drawer automatically. Or call
+      PawsCart.add({name:'...', price:899, img:'...'}) in JS.
+  • Currency symbol: change PP_CURRENCY in the script at the bottom.
+  ============================================================
+-->
+<script>
+  /* Runs before paint: enables JS-only animation states + branded image fallbacks */
+  document.documentElement.className += ' pp-js';
+  window.ppFallback = function (tone) {
+    var c = {orange:'#EC802B', teal:'#66BCB4', yellow:'#EDC558', cream:'#E8CCAD'}[tone] || '#EDC558';
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="' + c + '"/>' +
+      '<g fill="#2A1C14" opacity=".12"><circle cx="60" cy="60" r="10"/><circle cx="340" cy="90" r="14"/><circle cx="80" cy="330" r="12"/><circle cx="330" cy="320" r="9"/></g>' +
+      '<g transform="translate(110 100)"><ellipse cx="34" cy="80" rx="30" ry="58" transform="rotate(20 34 80)" fill="#EC802B" stroke="#2A1C14" stroke-width="6"/><ellipse cx="146" cy="80" rx="30" ry="58" transform="rotate(-20 146 80)" fill="#EC802B" stroke="#2A1C14" stroke-width="6"/>' +
+      '<circle cx="90" cy="110" r="78" fill="#E8CCAD" stroke="#2A1C14" stroke-width="6"/><circle cx="62" cy="100" r="9" fill="#2A1C14"/><circle cx="118" cy="100" r="9" fill="#2A1C14"/>' +
+      '<ellipse cx="90" cy="130" rx="15" ry="11" fill="#2A1C14"/><path d="M76 150q14 12 28 0" stroke="#2A1C14" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M82 154q8 26 16 0z" fill="#EC802B" stroke="#2A1C14" stroke-width="3"/>' +
+      '<path d="M30 178q60 30 120 0l-10 26q-50 22-100 0z" fill="#66BCB4" stroke="#2A1C14" stroke-width="5"/></g></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  };
+  document.addEventListener('error', function (e) {
+    var t = e.target;
+    if (t && t.tagName === 'IMG' && !t.getAttribute('data-fb')) {
+      t.setAttribute('data-fb', '1');
+      t.src = window.ppFallback(t.getAttribute('data-tone'));
+    }
+  }, true);
+</script>
+<style>
+/* ===================== TOKENS ===================== */
+:root{
+  --cream:#E8CCAD; --orange:#EC802B; --yellow:#EDC558; --teal:#66BCB4;
+  --ink:#2A1C14; --paper:#FBF4EC; --ink-soft:rgba(42,28,20,.74);
+  --f-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-italic:"Fraunces", Georgia, serif;
+  --f-body:"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --gutter:clamp(16px,4vw,56px);
+  --maxw:1400px;
+  --bw:3px;
+  --pop:6px 6px 0 var(--ink);
+  --pop-sm:3px 3px 0 var(--ink);
+}
+
+/* ===================== BASE ===================== */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0}
+.pp{font-family:var(--f-body);font-size:1.0625rem;line-height:1.6;color:var(--ink);background:var(--cream);overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.pp *,.pp *::before,.pp *::after{box-sizing:border-box}
+.pp img{display:block;max-width:100%;height:auto}
+.pp a{color:inherit;text-decoration:none}
+.pp button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.pp h1,.pp h2,.pp h3,.pp h4,.pp p,.pp ul,.pp figure{margin:0;padding:0}
+.pp ul{list-style:none}
+.pp section{position:relative;scroll-margin-top:90px}
+.pp ::selection{background:var(--yellow);color:var(--ink)}
+.pp :focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 7px var(--yellow);border-radius:12px}
+.pp-sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pp-skip{position:fixed;left:16px;top:-80px;z-index:999;background:var(--ink);color:var(--yellow);padding:12px 18px;border-radius:999px;font-weight:800;transition:top .3s}
+.pp-skip:focus{top:16px}
+.pp-wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.pp-icon{width:1em;height:1em;display:inline-block;flex:none}
+
+/* ===================== TYPE ===================== */
+.pp-display{font-family:var(--f-display);font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:-.015em;line-height:.88;font-variation-settings:"opsz" 96}
+.pp-h2{font-family:var(--f-display);font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:-.015em;line-height:.88;font-size:clamp(2.7rem,7.2vw,6.8rem)}
+.pp-it{font-family:var(--f-italic);font-style:italic;font-weight:700;text-transform:none;letter-spacing:-.02em;font-stretch:100%}
+.pp-eyebrow{display:inline-flex;align-items:center;gap:.6em;font:800 .78rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase}
+.pp-eyebrow::before{content:"";width:28px;height:3px;border-radius:3px;background:currentColor}
+.pp-lead{font-size:clamp(1.05rem,1.3vw,1.25rem);line-height:1.55;max-width:34em;font-weight:600}
+.pp-stroke{color:var(--orange);-webkit-text-stroke:.022em var(--ink);paint-order:stroke fill;text-shadow:.045em .05em 0 var(--ink)}
+
+/* ===================== BUTTONS ===================== */
+.pp-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.65em;min-height:54px;padding:0 1.7em;border-radius:999px;border:var(--bw) solid var(--ink);background:var(--paper);color:var(--ink);font:800 .95rem/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;box-shadow:4px 4px 0 var(--ink);translate:var(--tx,0px) var(--ty,0px);transition:transform .35s var(--ease-spring),box-shadow .35s var(--ease-spring),background-color .3s,translate .25s var(--ease-out);will-change:transform;white-space:nowrap;cursor:pointer}
+.pp-btn:hover{transform:translate(-2px,-3px);box-shadow:7px 8px 0 var(--ink)}
+.pp-btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink);transition-duration:.08s}
+.pp-btn--orange{background:var(--orange)}
+.pp-btn--yellow{background:var(--yellow)}
+.pp-btn--teal{background:var(--teal)}
+.pp-btn--ink{background:var(--ink);color:var(--yellow);box-shadow:4px 4px 0 var(--orange)}
+.pp-btn--ink:hover{box-shadow:7px 8px 0 var(--orange)}
+.pp-btn .pp-arrow{display:inline-block;transition:transform .35s var(--ease-spring)}
+.pp-btn:hover .pp-arrow{transform:translateX(5px);animation:pp-wiggle .6s var(--ease-io) .1s}
+.pp-btn__paw{position:absolute;right:-14px;top:-16px;width:30px;height:30px;color:var(--teal);transform:scale(0) rotate(-40deg);transition:transform .45s var(--ease-spring);pointer-events:none;filter:drop-shadow(2px 2px 0 var(--ink))}
+.pp-btn:hover .pp-btn__paw{transform:scale(1) rotate(12deg)}
+.pp-link{position:relative;font-weight:800;display:inline-flex;align-items:center;gap:.5em}
+.pp-link::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;border-radius:3px;background:currentColor;transform:scaleX(.25);transform-origin:left;transition:transform .5s var(--ease-out)}
+.pp-link:hover::after{transform:scaleX(1)}
+
+/* ===================== STICKERS / DOODLES ===================== */
+.pp-sticker{display:inline-flex;align-items:center;gap:.5em;padding:.6em 1.05em;border:2.5px solid var(--ink);border-radius:999px;background:var(--yellow);font:800 .78rem/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;box-shadow:var(--pop-sm);rotate:var(--rot,0deg);white-space:nowrap}
+.pp-sticker--teal{background:var(--teal)}
+.pp-sticker--orange{background:var(--orange)}
+.pp-sticker--paper{background:var(--paper)}
+.pp-sticker--cream{background:var(--cream)}
+.pp-sticker .pp-icon{width:1.2em;height:1.2em}
+.pp-spin{animation:pp-spin 16s linear infinite}
+.pp-spin--rev{animation:pp-spin 22s linear infinite reverse}
+.pp-bob{animation:pp-bob var(--bd-dur,6s) ease-in-out infinite;animation-delay:var(--bd,0s)}
+.pp-wiggle-hover:hover .pp-arrowdoodle,.pp-arrowdoodle:hover{animation:pp-wiggle .7s var(--ease-io)}
+.pp-float{position:absolute;pointer-events:none;translate:var(--mx,0px) calc(var(--py,0px) + var(--my,0px));will-change:translate}
+.pp-bubble{position:relative;display:inline-block;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:22px;padding:.7em 1em;font:700 1.05rem/1.1 var(--f-italic);font-style:italic;box-shadow:var(--pop-sm)}
+.pp-bubble::after{content:"";position:absolute;left:22px;bottom:-14px;width:22px;height:22px;background:var(--paper);border-right:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);transform:skewX(30deg) rotate(45deg) scale(.7)}
+
+/* ===================== KEYFRAMES ===================== */
+@keyframes pp-spin{to{transform:rotate(360deg)}}
+@keyframes pp-bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(4deg)}}
+@keyframes pp-wiggle{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(4px) rotate(-8deg)}40%{transform:translateX(-3px) rotate(6deg)}60%{transform:translateX(3px) rotate(-4deg)}80%{transform:translateX(-1px) rotate(2deg)}}
+@keyframes pp-morph{0%,100%{border-radius:58% 42% 55% 45%/45% 55% 45% 55%}33%{border-radius:42% 58% 38% 62%/58% 38% 62% 42%}66%{border-radius:55% 45% 62% 38%/40% 62% 38% 60%}}
+@keyframes pp-pawstep{0%{opacity:0;transform:scale(.4) rotate(var(--pr,0deg))}12%{opacity:.85;transform:scale(1.1) rotate(var(--pr,0deg))}20%{transform:scale(1) rotate(var(--pr,0deg))}65%{opacity:.85}85%,100%{opacity:0;transform:scale(.9) rotate(var(--pr,0deg))}}
+@keyframes pp-pop{0%{transform:scale(.2) rotate(-25deg);opacity:0}60%{transform:scale(1.12) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+@keyframes pp-bump{0%{transform:scale(1)}30%{transform:scale(1.6) rotate(-10deg)}60%{transform:scale(.9) rotate(6deg)}100%{transform:scale(1)}}
+@keyframes pp-bounce{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px) rotate(-8deg)}50%{transform:translateY(0)}70%{transform:translateY(-4px) rotate(5deg)}}
+@keyframes pp-stamp{0%{opacity:0;transform:translate(-50%,-50%) scale(2) rotate(var(--sr))}15%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--sr))}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-60%) scale(.8) rotate(var(--sr))}}
+@keyframes pp-burst{0%{opacity:1;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(calc(-50% + var(--bx)),calc(-50% + var(--by))) scale(1) rotate(var(--brot))}}
+@keyframes pp-heartpop{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}45%{transform:translate(-50%,-50%) scale(.95)}70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-80%) scale(.9)}}
+@keyframes pp-tilt{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(8deg)}}
+@keyframes pp-scrollcue{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes pp-shine{to{background-position:200% 0}}
+
+/* ===================== SCROLL REVEALS (JS-only) ===================== */
+.pp-js [data-reveal]{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease-out) var(--d,0s),transform 1.1s var(--ease-out) var(--d,0s)}
+.pp-js [data-reveal="left"]{transform:translateX(-60px) rotate(-2deg)}
+.pp-js [data-reveal="right"]{transform:translateX(60px) rotate(2deg)}
+.pp-js [data-reveal="pop"]{transform:scale(.3) rotate(-18deg);transition:opacity .45s var(--ease-out) var(--d,0s),transform .8s var(--ease-spring) var(--d,0s)}
+.pp-js [data-reveal="clip"]{opacity:1;transform:none}
+.pp-js [data-reveal="clip"] > img{clip-path:inset(100% 0 0 0);scale:1.25;transition:clip-path 1.2s var(--ease-out) var(--d,0s),scale 1.6s var(--ease-out) var(--d,0s),transform 1s var(--ease-out)}
+.pp-js [data-reveal].is-in{opacity:1;transform:none}
+.pp-js [data-reveal="clip"].is-in > img{clip-path:inset(0 0 0 0);scale:1}
+.pp svg{fill:currentColor}
+/* split headings */
+.pp-js [data-split] .w{display:inline-block;clip-path:inset(-20% -12% 100% -12%);transform:translateY(55%) rotate(5deg);transition:clip-path 1s var(--ease-out),transform 1s var(--ease-out);transition-delay:calc(var(--i)*75ms + var(--d,0s))}
+.pp-js [data-split].is-in .w{clip-path:inset(-20% -12% -25% -12%);transform:none}
+
+/* ===================== PAGE CURTAIN ===================== */
+.pp-curtain{position:fixed;inset:0;z-index:200;pointer-events:none;display:grid}
+.pp-curtain span{grid-area:1/1;transform-origin:top;transform:scaleY(1)}
+.pp-curtain span:nth-child(1){background:var(--teal)}
+.pp-curtain span:nth-child(2){background:var(--yellow)}
+.pp-curtain span:nth-child(3){background:var(--orange);display:grid;place-items:center}
+.pp-curtain__logo{width:88px;height:88px;color:var(--cream);animation:pp-bounce 1s var(--ease-io) infinite;filter:drop-shadow(4px 4px 0 var(--ink))}
+.pp-ready .pp-curtain span{transform:scaleY(0);transition:transform .9s var(--ease-io)}
+.pp-ready .pp-curtain span:nth-child(3){transition-delay:0s}
+.pp-ready .pp-curtain span:nth-child(2){transition-delay:.12s}
+.pp-ready .pp-curtain span:nth-child(1){transition-delay:.24s}
+.pp-curtain.is-leaving span{transform-origin:bottom;transform:scaleY(1)!important;transition:transform .55s var(--ease-io)!important}
+.pp-curtain.is-leaving span:nth-child(1){transition-delay:0s!important}
+.pp-curtain.is-leaving span:nth-child(2){transition-delay:.08s!important}
+.pp-curtain.is-leaving span:nth-child(3){transition-delay:.16s!important}
+html:not(.pp-js) .pp-curtain{display:none}
+
+/* ===================== SCROLL PROGRESS ===================== */
+.pp-progress{position:fixed;left:0;top:0;height:5px;width:100%;z-index:60;pointer-events:none}
+.pp-progress__bar{height:100%;background:linear-gradient(90deg,var(--teal),var(--yellow),var(--orange));transform-origin:left;transform:scaleX(var(--p,0))}
+
+/* ===================== NAV ===================== */
+.pp-nav{position:fixed;top:14px;left:50%;z-index:70;width:min(calc(100% - 24px),1380px);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 16px;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:var(--pop-sm);transform:translate(-50%,0);transition:transform .9s var(--ease-spring),padding .45s var(--ease-out),background-color .45s,box-shadow .45s,width .45s var(--ease-out),top .45s var(--ease-out)}
+.pp-js .pp-nav{transform:translate(-50%,-160%)}
+.pp-ready .pp-nav{transform:translate(-50%,0);transition-delay:.55s,0s,0s,0s,0s,0s}
+.pp-nav.is-scrolled{top:10px;padding:6px 6px 6px 14px;width:min(calc(100% - 24px),1180px);background:rgba(251,244,236,.86);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 14px 34px -14px rgba(42,28,20,.45),3px 3px 0 var(--ink)}
+.pp-logo{display:inline-flex;align-items:center;gap:10px;font:800 1.32rem/1 var(--f-display);font-stretch:80%;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap}
+.pp-logo__mark{width:42px;height:42px;border-radius:50%;background:var(--orange);border:var(--bw) solid var(--ink);display:grid;place-items:center;color:var(--paper);transition:transform .6s var(--ease-spring)}
+.pp-logo__mark .pp-icon{width:24px;height:24px}
+.pp-logo:hover .pp-logo__mark{transform:rotate(-20deg) scale(1.08)}
+.pp-logo__amp{font-family:var(--f-italic);font-style:italic;color:var(--orange);font-weight:800;margin:0 .02em;-webkit-text-stroke:.02em var(--ink)}
+.pp-js .pp-nav .pp-logo{opacity:0;transform:translateX(-18px);transition:opacity .7s var(--ease-out) .9s,transform .7s var(--ease-out) .9s}
+.pp-ready .pp-nav .pp-logo{opacity:1;transform:none}
+.pp-nav.is-scrolled .pp-logo__mark{width:36px;height:36px}
+.pp-nav__links{display:flex;gap:4px}
+.pp-nav__links a{position:relative;padding:10px 14px;border-radius:999px;font:700 .95rem/1 var(--f-body);isolation:isolate}
+.pp-nav__links a::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--yellow);transform:scale(.4);opacity:0;transition:transform .45s var(--ease-spring),opacity .25s;z-index:-1}
+.pp-nav__links a:hover::before,.pp-nav__links a.is-active::before{transform:scale(1);opacity:1}
+.pp-nav__links a.is-active::before{background:var(--teal)}
+.pp-nav__right{display:flex;align-items:center;gap:6px}
+.pp-iconbtn{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;transition:background-color .25s,transform .4s var(--ease-spring)}
+.pp-iconbtn:hover{background:var(--cream);transform:rotate(-8deg)}
+.pp-iconbtn .pp-icon{width:22px;height:22px}
+.pp-cartbtn.is-bump{animation:pp-bounce .7s var(--ease-io)}
+.pp-cartcount{position:absolute;top:2px;right:0;min-width:21px;height:21px;padding:0 5px;border-radius:999px;background:var(--orange);border:2px solid var(--ink);font:800 .7rem/17px var(--f-display);text-align:center;transform:scale(0);transition:transform .4s var(--ease-spring)}
+.pp-cartcount.has-items{transform:scale(1)}
+.pp-cartcount.is-bump{animation:pp-bump .6s var(--ease-io)}
+.pp-nav__cta{min-height:46px;padding:0 1.25em;font-size:.85rem;box-shadow:3px 3px 0 var(--ink)}
+.pp-burger{display:none;width:48px;height:48px;border-radius:50%;background:var(--orange);border:var(--bw) solid var(--ink);position:relative}
+.pp-burger span{position:absolute;left:12px;right:12px;height:3px;border-radius:3px;background:var(--ink);transition:transform .45s var(--ease-spring),opacity .2s,top .3s var(--ease-out)}
+.pp-burger span:nth-child(1){top:14px}.pp-burger span:nth-child(2){top:20.5px;right:18px}.pp-burger span:nth-child(3){top:27px}
+.pp-burger[aria-expanded="true"] span:nth-child(1){top:20.5px;transform:rotate(45deg)}
+.pp-burger[aria-expanded="true"] span:nth-child(2){opacity:0;transform:translateX(-10px)}
+.pp-burger[aria-expanded="true"] span:nth-child(3){top:20.5px;transform:rotate(-45deg)}
+
+/* Mobile menu */
+.pp-menu{position:fixed;inset:0;z-index:65;background:var(--orange);clip-path:circle(0% at calc(100% - 46px) 46px);transition:clip-path .8s var(--ease-io);display:flex;flex-direction:column;justify-content:space-between;padding:110px var(--gutter) 34px;overflow:hidden;visibility:hidden}
+.pp-menu.is-open{clip-path:circle(150% at calc(100% - 46px) 46px);visibility:visible}
+.pp-menu__links a{display:block;font:800 clamp(2.8rem,13vw,4.6rem)/.95 var(--f-display);font-stretch:78%;text-transform:uppercase;color:var(--cream);-webkit-text-stroke:.02em var(--ink);paint-order:stroke fill;text-shadow:.05em .05em 0 var(--ink);padding:.08em 0;transform:translateY(60px) rotate(4deg);opacity:0;transition:transform .7s var(--ease-spring),opacity .4s}
+.pp-menu.is-open .pp-menu__links a{transform:none;opacity:1;transition-delay:calc(.25s + var(--i)*.07s)}
+.pp-menu__links a:active{color:var(--yellow)}
+.pp-menu__foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;opacity:0;transform:translateY(20px);transition:opacity .5s .6s,transform .6s var(--ease-out) .6s}
+.pp-menu.is-open .pp-menu__foot{opacity:1;transform:none}
+.pp-menu__deco{position:absolute;right:-40px;bottom:120px;width:220px;height:220px;color:var(--yellow);opacity:.9}
+
+/* ===================== HERO ===================== */
+.pp-hero{min-height:100svh;padding:130px var(--gutter) 70px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:center;gap:2vw;overflow:clip;isolation:isolate}
+.pp-hero__bg{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(circle at 8% 88%, rgba(102,188,180,.55) 0 120px, transparent 121px),
+  radial-gradient(circle at 46% 6%, rgba(237,197,88,.6) 0 70px, transparent 71px),
+  var(--cream);transition:opacity 1.2s var(--ease-out),transform 1.6s var(--ease-out)}
+.pp-js .pp-hero__bg{opacity:0;transform:scale(1.08)}
+.pp-ready .pp-hero__bg{opacity:1;transform:none}
+.pp-hero__text{position:relative;z-index:3}
+.pp-hero__kicker{margin-bottom:22px}
+.pp-hero__title{font-family:var(--f-display);font-weight:800;font-stretch:76%;text-transform:uppercase;line-height:.84;letter-spacing:-.02em;margin-bottom:26px}
+.pp-hero__title .ln{display:block;white-space:nowrap}
+.pp-hero__title .ln--sm{font-size:clamp(2.4rem,5.4vw,5.6rem)}
+.pp-hero__title .ln--big{font-size:clamp(3.3rem,9.6vw,10.4rem);margin:.02em 0 .06em -.02em}
+.pp-hero__title .wd{display:inline-block}
+.pp-hero__title .wd--out{font-family:var(--f-italic);font-style:italic;font-weight:800;text-transform:none;font-stretch:100%;color:var(--teal);-webkit-text-stroke:.02em var(--ink);paint-order:stroke fill;text-shadow:.04em .045em 0 var(--ink);font-size:1.12em;letter-spacing:-.03em}
+.pp-hero__title .ln-sticker{display:inline-flex;vertical-align:middle;margin-left:.25em;width:.85em;height:.85em;color:var(--orange)}
+.pp-hero__title .ln-sticker svg{width:100%;height:100%;filter:drop-shadow(3px 3px 0 var(--ink))}
+.pp-js .pp-hero__title .wd{clip-path:inset(-10% -8% 100% -8%);transform:translateY(45%) rotate(6deg);transition:clip-path 1.1s var(--ease-out),transform 1.1s var(--ease-out);transition-delay:calc(1s + var(--i)*.12s)}
+.pp-ready .pp-hero__title .wd{clip-path:inset(-20% -12% -30% -12%);transform:none}
+.pp-hero__copy{max-width:30em;font-size:clamp(1.05rem,1.35vw,1.28rem);font-weight:600;line-height:1.5;margin-bottom:30px}
+.pp-hero__ctas{display:flex;flex-wrap:wrap;gap:14px 16px;margin-bottom:34px}
+.pp-hero__proof{display:flex;align-items:center;gap:14px;font-weight:700;font-size:.95rem}
+.pp-avatars{display:flex}
+.pp-avatars img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:3px solid var(--ink);margin-left:-12px;background:var(--yellow)}
+.pp-avatars img:first-child{margin-left:0}
+.pp-stars{display:flex;gap:2px;color:var(--orange)}
+.pp-stars .pp-icon{width:17px;height:17px;filter:drop-shadow(1px 1px 0 var(--ink))}
+.pp-js .pp-hero [data-seq]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out) var(--sd),transform 1s var(--ease-out) var(--sd)}
+.pp-ready .pp-hero [data-seq]{opacity:1;transform:none}
+
+.pp-hero__visual{position:relative;width:100%;max-width:640px;justify-self:end;aspect-ratio:4/5;max-height:min(82vh,780px);z-index:1}
+.pp-hero__blob{position:absolute;inset:4% -6% 0 4%;background:var(--orange);border:var(--bw) solid var(--ink);animation:pp-morph 14s ease-in-out infinite;z-index:-1;transition:transform 1.2s var(--ease-spring) .85s}
+.pp-js .pp-hero__blob{transform:scale(0) rotate(-30deg)}
+.pp-ready .pp-hero__blob{transform:none}
+.pp-hero__sun{position:absolute;top:-2%;left:-8%;width:30%;aspect-ratio:1;border-radius:50%;background:var(--yellow);border:var(--bw) solid var(--ink);z-index:-1}
+.pp-hero__photo{position:absolute;inset:10% 10% 6% 14%;border-radius:999px 999px 40px 40px;overflow:hidden;border:4px solid var(--ink);box-shadow:var(--pop);background:var(--teal);transition:transform 1.3s var(--ease-out) 1.05s,opacity .6s 1.05s}
+.pp-js .pp-hero__photo{transform:scale(.55) rotate(-8deg) translateY(10%);opacity:0}
+.pp-ready .pp-hero__photo{transform:none;opacity:1}
+.pp-hero__photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.12) translate(var(--ix,0px),var(--iy,0px));transition:transform .2s linear}
+.pp-hero__badge{position:absolute;left:-4%;bottom:4%;width:30%;min-width:120px;z-index:4}
+.pp-hero__bubble{position:absolute;right:-2%;top:6%;z-index:4}
+.pp-pop-in{transition:transform .9s var(--ease-spring) var(--sd),opacity .4s var(--sd)}
+.pp-js .pp-pop-in{transform:scale(0) rotate(-30deg);opacity:0}
+.pp-ready .pp-pop-in{transform:none;opacity:1}
+.pp-acc{z-index:5}
+.pp-acc svg{display:block;width:100%;height:auto;filter:drop-shadow(4px 5px 0 var(--ink))}
+.pp-hero__squiggle{position:absolute;left:0;bottom:-6%;width:46%;color:var(--teal);z-index:2}
+.pp-pawtrail{position:absolute;left:var(--gutter);bottom:26px;display:flex;gap:22px;z-index:0;color:var(--ink);opacity:.18}
+.pp-pawtrail span{display:block;width:26px;height:26px;opacity:0;animation:pp-pawstep 5.2s ease-in-out infinite;animation-delay:calc(var(--i)*.42s)}
+.pp-pawtrail span:nth-child(odd){margin-top:16px;--pr:80deg}
+.pp-pawtrail span:nth-child(even){--pr:100deg}
+.pp-scrollcue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font:800 .72rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;z-index:3}
+.pp-scrollcue .pp-icon{width:22px;height:22px;color:var(--orange);animation:pp-scrollcue 1.6s ease-in-out infinite;filter:drop-shadow(1px 1px 0 var(--ink))}
+.pp-stamp{position:absolute;width:38px;height:38px;color:var(--orange);pointer-events:none;z-index:6;animation:pp-stamp 1.4s var(--ease-out) forwards;filter:drop-shadow(2px 2px 0 var(--ink))}
+
+/* ===================== TAPES / MARQUEE ===================== */
+.pp-tapes{position:relative;height:clamp(150px,18vw,230px);overflow:clip;margin-top:-30px;z-index:4;pointer-events:none}
+.pp-tape{position:absolute;left:-5%;width:110%;border-block:var(--bw) solid var(--ink);padding:16px 0;overflow:hidden}
+.pp-tape--a{top:22%;background:var(--teal);rotate:-3deg;z-index:2;box-shadow:0 8px 0 var(--ink)}
+.pp-tape--b{top:34%;background:var(--yellow);rotate:2.5deg}
+.pp-marquee{display:flex;width:max-content;will-change:transform}
+.pp-marquee__item{display:flex;align-items:center;gap:26px;padding-right:26px;font:800 clamp(1.4rem,3vw,2.6rem)/1 var(--f-display);font-stretch:80%;text-transform:uppercase;white-space:nowrap}
+.pp-tape--a .pp-marquee__item{color:var(--yellow);-webkit-text-stroke:.03em var(--ink);paint-order:stroke fill;text-shadow:.05em .05em 0 var(--ink)}
+.pp-marquee__item .pp-icon{width:.9em;height:.9em}
+.pp-tape--a .pp-icon{color:var(--orange);filter:drop-shadow(2px 2px 0 var(--ink))}
+.pp-tape--b .pp-icon{color:var(--teal)}
+
+/* ===================== ABOUT ===================== */
+.pp-about{padding:clamp(70px,10vw,150px) 0 clamp(80px,10vw,160px)}
+.pp-about__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,100px);align-items:center}
+.pp-collage{position:relative;aspect-ratio:1/1.08;max-width:620px}
+.pp-collage__block{position:absolute;inset:8% 14% 0 0;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:46px;rotate:-4deg}
+.pp-collage__block::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(var(--ink) 1.6px,transparent 2px) 0 0/22px 22px;opacity:.12}
+.pp-collage__main{position:absolute;inset:0 22% 12% 6%;border-radius:220px 220px 36px 36px;overflow:hidden;border:4px solid var(--ink);box-shadow:var(--pop)}
+.pp-collage__main img,.pp-collage__polaroid img{width:100%;height:100%;object-fit:cover}
+.pp-collage__polaroid{position:absolute;right:0;bottom:4%;width:44%;background:var(--paper);padding:10px 10px 44px;border:var(--bw) solid var(--ink);border-radius:10px;rotate:7deg;box-shadow:var(--pop);transition:rotate .5s var(--ease-spring),transform .5s var(--ease-spring)}
+.pp-collage__polaroid:hover{rotate:0deg;transform:scale(1.04)}
+.pp-collage__polaroid figure{aspect-ratio:1;overflow:hidden;border-radius:4px;border:2px solid var(--ink)}
+.pp-collage__polaroid figcaption{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:700 1rem/1 var(--f-italic);font-style:italic}
+.pp-collage .pp-sticker{position:absolute;z-index:3;font-size:clamp(.7rem,1vw,.85rem)}
+.pp-note{position:absolute;left:-2%;bottom:-6%;display:flex;align-items:flex-end;gap:6px;font:700 1.15rem/1.15 var(--f-italic);font-style:italic;max-width:200px;z-index:3}
+.pp-note svg{width:84px;height:auto;color:var(--ink);transform:scaleY(-1) rotate(160deg);flex:none}
+.pp-about__text .pp-h2{margin:18px 0 26px}
+.pp-about__text .pp-h2 .pp-it{color:var(--orange);-webkit-text-stroke:.018em var(--ink);paint-order:stroke fill}
+.pp-about__text p+p{margin-top:16px}
+.pp-about__text p{max-width:34em;font-weight:600}
+.pp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:36px 0 34px}
+.pp-stat{border:var(--bw) solid var(--ink);border-radius:24px;padding:16px 16px 14px;background:var(--paper);box-shadow:var(--pop-sm);transition:transform .45s var(--ease-spring),background-color .3s;rotate:var(--rot,0deg)}
+.pp-stat:hover{transform:translateY(-6px) rotate(-2deg);background:var(--yellow)}
+.pp-stat__n{display:block;font:800 clamp(2.2rem,4vw,3.6rem)/.9 var(--f-display);font-stretch:76%;color:var(--orange);-webkit-text-stroke:.02em var(--ink);paint-order:stroke fill;text-shadow:.04em .04em 0 var(--ink)}
+.pp-stat__l{display:block;margin-top:8px;font:800 .72rem/1.2 var(--f-display);letter-spacing:.1em;text-transform:uppercase}
+
+/* ===================== STORY (horizontal pin) ===================== */
+.pp-story{background:var(--ink)}
+.pp-story__sticky{position:relative}
+.pp-story__track{display:flex;flex-direction:column}
+.pp-panel{position:relative;min-height:88vh;padding:clamp(90px,10vw,140px) var(--gutter) clamp(60px,8vw,100px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,80px);align-items:center;overflow:clip;background:var(--bg)}
+.pp-panel__num{font:800 clamp(7rem,20vw,19rem)/.75 var(--f-display);font-stretch:76%;color:var(--numc,var(--paper));-webkit-text-stroke:.012em var(--ink);paint-order:stroke fill;text-shadow:.03em .03em 0 var(--ink);display:block;margin-bottom:10px}
+.pp-panel h3{font:800 clamp(2rem,4.4vw,4.2rem)/.92 var(--f-display);font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:18px}
+.pp-panel p{font-weight:600;max-width:30em;font-size:clamp(1rem,1.25vw,1.18rem)}
+.pp-panel__img{position:relative;aspect-ratio:4/5;max-height:62vh;width:100%;max-width:440px;justify-self:center;border:4px solid var(--ink);border-radius:var(--shape,40px);overflow:hidden;box-shadow:var(--pop);rotate:var(--rot,0deg);transition:rotate .6s var(--ease-spring)}
+.pp-panel__img:hover{rotate:0deg}
+.pp-panel__img img{width:100%;height:100%;object-fit:cover;transform:scale(1.15) translateX(var(--imgx,0px));transition:transform .15s linear}
+.pp-panel .pp-sticker{position:absolute}
+.pp-panel--intro{grid-template-columns:1fr;background:var(--teal)}
+.pp-panel--intro .pp-h2{font-size:clamp(3rem,9vw,9rem);color:var(--yellow);-webkit-text-stroke:.02em var(--ink);paint-order:stroke fill;text-shadow:.04em .04em 0 var(--ink)}
+.pp-panel--intro .pp-it{color:var(--paper)}
+.pp-story__hint{display:none;align-items:center;gap:12px;font:800 .8rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;margin-top:28px}
+.pp-story__hint svg{width:90px;color:var(--ink)}
+.pp-story__bar{display:none}
+/* desktop pin mode (enabled by JS) */
+.pp-story.is-pinned .pp-story__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.pp-story.is-pinned .pp-story__track{flex-direction:row;height:100%;width:max-content;will-change:transform}
+.pp-story.is-pinned .pp-panel{width:min(86vw,1280px);height:100vh;min-height:0;flex:none;border-right:var(--bw) solid var(--ink)}
+.pp-story.is-pinned .pp-panel--intro{width:min(70vw,980px)}
+.pp-story.is-pinned .pp-story__hint{display:flex}
+.pp-story.is-pinned .pp-story__bar{display:block;position:absolute;left:var(--gutter);right:var(--gutter);bottom:28px;height:6px;border-radius:6px;background:rgba(42,28,20,.18);z-index:5}
+.pp-story__bar span{position:absolute;inset:0;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--sp,0))}
+.pp-story__bar i{position:absolute;top:50%;left:calc(var(--sp,0)*100%);width:34px;height:34px;margin:-17px 0 0 -17px;color:var(--paper);filter:drop-shadow(2px 2px 0 var(--ink))}
+.pp-story__bar i svg{width:100%;height:100%;rotate:90deg}
+
+/* ===================== CATEGORIES ===================== */
+.pp-cats{background:var(--paper);padding:clamp(80px,10vw,150px) 0;overflow:clip}
+.pp-cats::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 100 100'%3E%3Cg fill='%23E8CCAD' opacity='.55' transform='rotate(-20 50 50) translate(30 30) scale(.4)'%3E%3Cellipse cx='22' cy='40' rx='10' ry='13'/%3E%3Cellipse cx='40' cy='22' rx='10' ry='13'/%3E%3Cellipse cx='60' cy='22' rx='10' ry='13'/%3E%3Cellipse cx='78' cy='40' rx='10' ry='13'/%3E%3Cpath d='M50 46c-14 0-28 18-28 30 0 9 7 13 15 13 6 0 9-3 13-3s7 3 13 3c8 0 15-4 15-13 0-12-14-30-28-30z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.pp-cats__head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(36px,5vw,64px);position:relative}
+.pp-cats__head .pp-h2 .pp-it{color:var(--teal);-webkit-text-stroke:.018em var(--ink);paint-order:stroke fill}
+.pp-cats__head p{max-width:22em;font-weight:600}
+.pp-catgrid{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(220px,auto);gap:clamp(16px,2vw,26px)}
+.pp-cat{--rx:0deg;--ry:0deg;position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:300px;padding:clamp(20px,2.2vw,30px);background:var(--bg);border:var(--bw) solid var(--ink);border-radius:34px;box-shadow:var(--pop);overflow:hidden;isolation:isolate;transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));rotate:var(--rot,0deg);transition:transform .25s var(--ease-out),rotate .5s var(--ease-spring),box-shadow .45s var(--ease-spring),translate .45s var(--ease-spring),background-color .4s;cursor:pointer}
+.pp-cat:hover,.pp-cat:focus-visible{rotate:0deg;translate:0 -8px;box-shadow:10px 14px 0 var(--ink)}
+.pp-cat::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(var(--ink) 1.5px,transparent 2px) 0 0/18px 18px;opacity:0;transition:opacity .4s}
+.pp-cat:hover::after{opacity:.1}
+.pp-cat__top{position:relative;z-index:2}
+.pp-cat__num{font:700 1.15rem/1 var(--f-italic);font-style:italic;display:block;margin-bottom:6px}
+.pp-cat__name{font:800 clamp(2rem,3.4vw,3.4rem)/.88 var(--f-display);font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em}
+.pp-cat__tag{margin-top:10px;font-weight:700;font-size:1rem;max-width:15em}
+.pp-cat__go{position:relative;z-index:2;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:2.5px solid var(--ink);background:var(--paper);font:800 .8rem/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;transition:background-color .3s,transform .4s var(--ease-spring)}
+.pp-cat__go svg{width:34px;height:18px}
+.pp-cat:hover .pp-cat__go{background:var(--ink);color:var(--yellow)}
+.pp-cat:hover .pp-cat__go svg{animation:pp-wiggle .7s var(--ease-io)}
+.pp-cat__img{position:absolute;right:-6%;bottom:-8%;width:62%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:var(--bw) solid var(--ink);z-index:1;transition:transform .7s var(--ease-out);transform:translate(var(--ix,0px),var(--iy,0px))}
+.pp-cat__img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease-out)}
+.pp-cat:hover .pp-cat__img img{transform:scale(1.12) rotate(-3deg)}
+.pp-cat__acc{position:absolute;z-index:3;width:clamp(60px,7vw,96px);pointer-events:none;transition:transform .7s var(--ease-spring)}
+.pp-cat__acc svg{width:100%;height:auto;filter:drop-shadow(3px 4px 0 var(--ink))}
+.pp-cat:hover .pp-cat__acc{transform:rotate(-14deg) scale(1.12) translateY(-6px)}
+.pp-cat__paw{position:absolute;top:16px;right:16px;width:38px;height:38px;z-index:3;color:var(--paper);transform:scale(0) rotate(-50deg);transition:transform .5s var(--ease-spring);filter:drop-shadow(2px 2px 0 var(--ink))}
+.pp-cat:hover .pp-cat__paw{transform:scale(1) rotate(15deg)}
+.pp-cat--collars{grid-column:span 5;grid-row:span 2;--bg:var(--orange)}
+.pp-cat--collars .pp-cat__img{width:84%;right:-14%;bottom:-10%}
+.pp-cat--collars .pp-cat__name{font-size:clamp(2.6rem,5.4vw,5.4rem)}
+.pp-cat--bandanas{grid-column:span 4;--bg:var(--teal);--rot:1.5deg}
+.pp-cat--bowties{grid-column:span 3;--bg:var(--yellow);--rot:-2.5deg}
+.pp-cat--leashes{grid-column:span 4;--bg:var(--cream);--rot:-1deg}
+.pp-cat--harnesses{grid-column:span 3;--bg:var(--teal);--rot:2deg}
+.pp-cat--tags{grid-column:span 8;--bg:var(--yellow)}
+.pp-cat--tags .pp-cat__img{width:36%;right:4%;bottom:-24%}
+.pp-cat--cta{grid-column:span 4;--bg:var(--ink);color:var(--paper);--rot:-1.5deg;justify-content:center;align-items:flex-start;gap:18px}
+.pp-cat--cta .pp-cat__name{color:var(--yellow)}
+.pp-cat--cta .pp-cat__go{background:var(--orange)}
+.pp-cat--cta:hover .pp-cat__go{background:var(--yellow);color:var(--ink)}
+.pp-cat--bowties .pp-cat__name,.pp-cat--harnesses .pp-cat__name{font-size:clamp(1.6rem,2.5vw,2.8rem)}
+.pp-cat--bandanas .pp-cat__img,.pp-cat--bowties .pp-cat__img,.pp-cat--leashes .pp-cat__img,.pp-cat--harnesses .pp-cat__img{width:56%}
+.pp-cat--bowties .pp-cat__img,.pp-cat--harnesses .pp-cat__img{width:66%;right:-14%}
+
+/* ===================== CAMPAIGN ===================== */
+.pp-camp{background:var(--orange);padding:clamp(80px,10vw,140px) 0 0;overflow:clip;isolation:isolate}
+.pp-camp__eyebrow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.pp-camp__lines{position:relative}
+.pp-camp__line{font:800 clamp(5rem,17vw,18rem)/.82 var(--f-display);font-stretch:75%;text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap}
+.pp-camp__line .pp-marquee__item{font:inherit;font-stretch:inherit;padding-right:.25em;gap:.25em}
+.pp-camp__line--a{color:var(--cream);-webkit-text-stroke:.012em var(--ink);paint-order:stroke fill;text-shadow:.03em .035em 0 var(--ink)}
+.pp-camp__line--b{color:transparent;-webkit-text-stroke:.012em var(--ink)}
+.pp-camp__line--b .fill{color:var(--yellow);-webkit-text-stroke:.012em var(--ink);paint-order:stroke fill;text-shadow:.03em .035em 0 var(--ink)}
+.pp-camp__line .pp-icon{width:.55em;height:.55em;color:var(--teal);-webkit-text-stroke:0;filter:drop-shadow(.03em .03em 0 var(--ink))}
+.pp-camp__dog{position:absolute;left:50%;top:50%;width:clamp(200px,26vw,380px);aspect-ratio:1;translate:-50% -50%;z-index:3}
+.pp-camp__dog figure{width:100%;height:100%;border-radius:50%;overflow:hidden;border:5px solid var(--ink);box-shadow:var(--pop);background:var(--teal);transform:rotate(var(--camprot,0deg));transition:transform .2s linear}
+.pp-camp__dog img{width:100%;height:100%;object-fit:cover}
+.pp-camp__ring{position:absolute;inset:-14%;z-index:-1}
+.pp-camp__ring svg{width:100%;height:100%}
+.pp-camp .pp-float{z-index:4}
+.pp-camp__foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:end;padding:clamp(40px,6vw,80px) 0}
+.pp-camp__foot p{font-weight:700;font-size:clamp(1.05rem,1.4vw,1.3rem);max-width:30em}
+.pp-band{background:var(--ink);color:var(--cream);border-top:var(--bw) solid var(--ink);padding:18px 0;overflow:hidden}
+.pp-band .pp-marquee__item{font-size:clamp(1.2rem,2.4vw,2rem);gap:22px;padding-right:22px}
+.pp-band .pp-icon{color:var(--orange)}
+
+/* ===================== ZONE (bg transition) ===================== */
+.pp-zone{background:var(--yellow);transition:background-color 1s var(--ease-io)}
+
+/* ===================== TESTIMONIALS ===================== */
+.pp-reviews{padding:clamp(80px,10vw,150px) 0 clamp(60px,7vw,110px)}
+.pp-reviews__head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,50px)}
+.pp-reviews__head .pp-h2 .pp-it{color:var(--paper);-webkit-text-stroke:.018em var(--ink);paint-order:stroke fill}
+.pp-reviews__ctrls{display:flex;gap:12px;align-items:center}
+.pp-roundbtn{width:58px;height:58px;border-radius:50%;border:var(--bw) solid var(--ink);background:var(--paper);display:grid;place-items:center;box-shadow:var(--pop-sm);transition:transform .35s var(--ease-spring),background-color .25s,box-shadow .35s}
+.pp-roundbtn:hover{background:var(--orange);transform:translateY(-3px) rotate(-8deg);box-shadow:5px 6px 0 var(--ink)}
+.pp-roundbtn svg{width:30px;height:16px}
+.pp-roundbtn--prev svg{transform:scaleX(-1)}
+.pp-track{display:flex;gap:clamp(18px,2.4vw,34px);overflow-x:auto;scroll-snap-type:x mandatory;padding:30px var(--gutter) 50px;scroll-padding-inline:var(--gutter);scrollbar-width:none;cursor:grab;overscroll-behavior-x:contain}
+.pp-track::-webkit-scrollbar{display:none}
+.pp-track.is-dragging{cursor:grabbing;scroll-snap-type:none}
+.pp-track.is-dragging *{pointer-events:none;user-select:none}
+.pp-review{position:relative;flex:none;width:clamp(286px,29vw,390px);scroll-snap-align:start;background:var(--c);border:var(--bw) solid var(--ink);border-radius:30px;padding:16px 16px 22px;box-shadow:var(--pop);rotate:var(--rot,0deg);transition:rotate .5s var(--ease-spring),transform .5s var(--ease-spring),box-shadow .5s var(--ease-spring)}
+.pp-review:hover,.pp-review:focus-within{rotate:0deg;transform:translateY(-12px);box-shadow:10px 16px 0 var(--ink)}
+.pp-review__img{aspect-ratio:5/4;border-radius:20px;overflow:hidden;border:var(--bw) solid var(--ink);margin-bottom:18px;background:var(--cream)}
+.pp-review__img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+.pp-review:hover .pp-review__img img{transform:scale(1.1)}
+.pp-review--circle .pp-review__img{width:120px;aspect-ratio:1;border-radius:50%;margin:6px 0 18px 6px}
+.pp-review--circle{padding-top:20px}
+.pp-review__q{font:700 1.14rem/1.4 var(--f-body);margin:12px 0 18px;padding:0 6px}
+.pp-review__q::before{content:"“";display:block;font:800 3.6rem/.6 var(--f-italic);margin:10px 0 0}
+.pp-review__who{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:0 6px}
+.pp-review__who strong{display:block;font:800 1.02rem/1.15 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
+.pp-review__who span{font-size:.9rem;font-weight:700;color:var(--ink-soft)}
+.pp-chip{display:inline-block;padding:7px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);font:800 .7rem/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase}
+.pp-review .pp-stars{padding:0 6px}
+.pp-review__deco{position:absolute;width:52px;height:52px;right:-14px;top:-18px;color:var(--orange);transform:scale(0) rotate(-60deg);transition:transform .55s var(--ease-spring);filter:drop-shadow(2px 3px 0 var(--ink))}
+.pp-review:hover .pp-review__deco,.pp-review:focus-within .pp-review__deco{transform:scale(1) rotate(-12deg)}
+.pp-review__deco--bone{width:74px;height:32px;top:-14px;right:-18px;color:var(--paper)}
+.pp-trackbar{height:6px;border-radius:6px;background:rgba(42,28,20,.15);margin:0 var(--gutter);position:relative;overflow:hidden;max-width:var(--maxw)}
+.pp-trackbar span{position:absolute;top:0;bottom:0;left:0;width:var(--tw,30%);border-radius:inherit;background:var(--ink);transform:translateX(var(--tp,0%))}
+
+/* ===================== SOCIAL ===================== */
+.pp-social{padding:clamp(60px,8vw,120px) 0 clamp(80px,10vw,150px)}
+.pp-social__head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
+.pp-social__head .pp-h2 .pp-it{color:var(--orange);-webkit-text-stroke:.018em var(--ink);paint-order:stroke fill}
+.pp-igrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(150px,17vw,250px);gap:clamp(12px,1.6vw,22px)}
+.pp-ig{position:relative;border:var(--bw) solid var(--ink);border-radius:26px;overflow:hidden;background:var(--teal);box-shadow:var(--pop-sm);rotate:var(--rot,0deg);transition:rotate .5s var(--ease-spring),transform .5s var(--ease-spring),box-shadow .4s;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pp-ig:hover,.pp-ig.is-active,.pp-ig:focus-visible{rotate:0deg;transform:scale(1.025);box-shadow:var(--pop);z-index:2}
+.pp-ig img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-out)}
+.pp-ig:hover img,.pp-ig.is-active img{transform:scale(1.08)}
+.pp-ig--tall{grid-row:span 2}
+.pp-ig--wide{grid-column:span 2}
+.pp-ig__over{position:absolute;left:10px;right:10px;bottom:10px;padding:14px 16px;border:2.5px solid var(--ink);border-radius:18px;background:var(--oc,var(--yellow));display:flex;align-items:center;justify-content:space-between;gap:10px;transform:translateY(130%);transition:transform .55s var(--ease-spring)}
+.pp-ig:hover .pp-ig__over,.pp-ig.is-active .pp-ig__over,.pp-ig:focus-visible .pp-ig__over{transform:none}
+.pp-ig__over strong{display:block;font:800 1rem/1.1 var(--f-display);text-transform:uppercase}
+.pp-ig__over span{font-size:.85rem;font-weight:700}
+.pp-like{display:inline-flex;align-items:center;gap:5px;font:800 .85rem/1 var(--f-display);padding:8px 10px;border-radius:999px;background:var(--paper);border:2px solid var(--ink);flex:none}
+.pp-like svg{width:17px;height:17px;color:transparent;stroke:var(--ink);stroke-width:7;transition:transform .4s var(--ease-spring),color .2s}
+.pp-like[aria-pressed="true"] svg{color:var(--orange);transform:scale(1.25)}
+.pp-ig__heart{position:absolute;left:50%;top:50%;width:110px;height:110px;color:var(--orange);pointer-events:none;animation:pp-heartpop 1s var(--ease-out) forwards;filter:drop-shadow(4px 4px 0 var(--ink))}
+.pp-ig__tag{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);display:grid;place-items:center;transform:scale(0) rotate(-40deg);transition:transform .45s var(--ease-spring) .05s}
+.pp-ig__tag svg{width:20px;height:20px;color:var(--orange)}
+.pp-ig:hover .pp-ig__tag,.pp-ig.is-active .pp-ig__tag{transform:scale(1) rotate(0)}
+.pp-ig--note{background:var(--orange);display:flex;flex-direction:column;justify-content:space-between;padding:20px;cursor:default}
+.pp-ig--note p{font:800 clamp(1.4rem,2.2vw,2.1rem)/.95 var(--f-display);font-stretch:80%;text-transform:uppercase}
+.pp-ig--note small{font-weight:700;font-size:.9rem}
+
+/* ===================== NEWSLETTER ===================== */
+.pp-news{background:var(--teal);padding:clamp(90px,11vw,170px) 0;overflow:clip;isolation:isolate}
+.pp-news__blob{position:absolute;width:min(70vw,900px);aspect-ratio:1;left:50%;top:50%;translate:-50% -50%;background:var(--yellow);border:var(--bw) solid var(--ink);animation:pp-morph 16s ease-in-out infinite;z-index:-1;opacity:.95}
+.pp-news__inner{max-width:880px;margin-inline:auto;text-align:center;position:relative}
+.pp-news .pp-h2{font-size:clamp(3rem,9vw,8.4rem);margin:16px 0 20px}
+.pp-news .pp-h2 .pp-it{color:var(--orange);-webkit-text-stroke:.018em var(--ink);paint-order:stroke fill;text-shadow:.03em .03em 0 var(--ink)}
+.pp-news__copy{font-weight:700;font-size:clamp(1.05rem,1.4vw,1.25rem);max-width:30em;margin:0 auto 38px}
+.pp-form{position:relative;max-width:620px;margin:0 auto}
+.pp-form__peek{position:absolute;left:50%;top:-58px;width:96px;translate:-50% 0;transform:translateY(40px);transition:transform .6s var(--ease-spring);z-index:0}
+.pp-form:focus-within .pp-form__peek,.pp-form.is-done .pp-form__peek{transform:translateY(0)}
+.pp-form__peek svg{width:100%;height:auto}
+.pp-form__row{position:relative;z-index:1;display:flex;gap:8px;padding:8px;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:var(--pop);transition:box-shadow .3s,transform .4s var(--ease-spring)}
+.pp-form__row:focus-within{transform:translateY(-3px);box-shadow:8px 10px 0 var(--ink)}
+.pp-form label.pp-form__label{display:block;font:800 .78rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.pp-form input{flex:1;min-width:0;border:0;background:transparent;padding:0 18px;font:700 1.08rem/1 var(--f-body);color:var(--ink);min-height:56px;border-radius:999px}
+.pp-form input::placeholder{color:rgba(42,28,20,.55)}
+.pp-form input:focus{outline:none}
+.pp-form .pp-btn{min-height:56px;box-shadow:none}
+.pp-form .pp-btn:hover{box-shadow:none;transform:scale(1.04) rotate(-2deg)}
+.pp-form.is-loading .pp-btn{pointer-events:none}
+.pp-form.is-loading .pp-btn .pp-btn__txt{opacity:0}
+.pp-form .pp-btn__spin{position:absolute;inset:0;display:grid;place-items:center;opacity:0}
+.pp-form .pp-btn__spin svg{width:26px;height:26px;animation:pp-spin .8s linear infinite}
+.pp-form.is-loading .pp-btn__spin{opacity:1}
+.pp-form.is-done .pp-form__row{background:var(--orange);transform:scale(1.02)}
+.pp-form.is-done .pp-btn{background:var(--ink);color:var(--yellow)}
+.pp-form__msg{min-height:1.6em;margin-top:16px;font:800 1.05rem/1.3 var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.pp-form__msg.is-err{color:var(--ink);text-transform:none;font-family:var(--f-body)}
+.pp-form__msg.is-ok{animation:pp-pop .7s var(--ease-spring)}
+.pp-form__small{font-size:.85rem;font-weight:600;margin-top:6px;opacity:.8}
+.pp-burst{position:fixed;width:28px;height:28px;pointer-events:none;z-index:120;animation:pp-burst 1.1s var(--ease-out) forwards;filter:drop-shadow(2px 2px 0 var(--ink))}
+
+/* ===================== FOOTER ===================== */
+.pp-foot{background:var(--orange);padding:clamp(70px,8vw,110px) 0 28px;overflow:clip;position:relative}
+.pp-foot__wave{position:absolute;top:-1px;left:0;width:100%;height:46px;color:var(--teal)}
+.pp-foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(28px,4vw,60px);margin-bottom:clamp(50px,7vw,90px)}
+.pp-foot__brand p{font:700 1.5rem/1.15 var(--f-italic);font-style:italic;margin:14px 0 20px;max-width:12em}
+.pp-foot h4{font:800 .78rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;opacity:.85}
+.pp-foot li+li{margin-top:10px}
+.pp-foot li a{font-weight:800;font-size:1.05rem;display:inline-flex;align-items:center;gap:8px;transition:transform .35s var(--ease-spring)}
+.pp-foot li a:hover{transform:translateX(6px)}
+.pp-foot li a .pp-icon{width:20px;height:20px}
+.pp-foot .pp-logo{font-size:1.6rem}
+.pp-foot .pp-logo__mark{background:var(--yellow);color:var(--ink)}
+.pp-foot .pp-logo__amp{color:var(--cream)}
+.pp-giant{display:flex;justify-content:center;flex-wrap:nowrap;font:800 clamp(4rem,17.5vw,19rem)/.8 var(--f-display);font-stretch:75%;text-transform:uppercase;letter-spacing:-.02em;color:var(--cream);-webkit-text-stroke:.01em var(--ink);paint-order:stroke fill;text-shadow:.025em .03em 0 var(--ink);user-select:none;white-space:nowrap}
+.pp-giant span{display:inline-block;transition:transform .5s var(--ease-spring),color .3s}
+.pp-giant span:hover{transform:translateY(-.12em) rotate(-6deg);color:var(--yellow)}
+.pp-giant .amp{font-family:var(--f-italic);font-style:italic;color:var(--teal);font-stretch:100%;margin:0 .04em}
+.pp-js .pp-giant span{transform:translateY(60%);opacity:0;transition:transform .9s var(--ease-spring) calc(var(--i)*55ms),opacity .4s calc(var(--i)*55ms),color .3s}
+.pp-js .pp-giant.is-in span{transform:none;opacity:1}
+.pp-js .pp-giant.is-in span:hover{transform:translateY(-.12em) rotate(-6deg);transition-delay:0s}
+.pp-foot__bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:var(--bw) solid var(--ink);font-weight:700}
+.pp-foot__bottom .pp-heart{display:inline-block;width:18px;height:18px;vertical-align:-3px;color:var(--yellow);animation:pp-bounce 1.6s ease-in-out infinite}
+.pp-foot__deco{position:absolute;pointer-events:none}
+
+/* ===================== CART DRAWER ===================== */
+.pp-scrim{position:fixed;inset:0;z-index:90;background:rgba(42,28,20,.45);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
+.pp-scrim.is-open{opacity:1;visibility:visible}
+.pp-drawer{position:fixed;top:10px;right:10px;bottom:10px;z-index:95;width:min(460px,calc(100% - 20px));background:var(--paper);border:var(--bw) solid var(--ink);border-radius:30px;box-shadow:var(--pop);display:flex;flex-direction:column;transform:translateX(115%) rotate(4deg);transition:transform .7s var(--ease-spring);overflow:hidden}
+.pp-drawer.is-open{transform:none}
+.pp-drawer__head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 16px 24px;border-bottom:var(--bw) solid var(--ink);background:var(--yellow)}
+.pp-drawer__head h2{font:800 1.7rem/1 var(--f-display);font-stretch:78%;text-transform:uppercase}
+.pp-drawer__body{flex:1;overflow-y:auto;padding:22px 20px}
+.pp-empty{text-align:center;padding:30px 10px}
+.pp-empty__dog{width:150px;margin:0 auto 18px;animation:pp-tilt 3.2s ease-in-out infinite;transform-origin:50% 80%}
+.pp-empty h3{font:800 clamp(1.8rem,5vw,2.3rem)/.92 var(--f-display);font-stretch:78%;text-transform:uppercase;margin-bottom:12px}
+.pp-empty p{font-weight:600;margin-bottom:24px}
+.pp-citem{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;padding:12px;border:2.5px solid var(--ink);border-radius:20px;background:var(--cream);margin-bottom:12px;animation:pp-citem .6s var(--ease-spring)}
+@keyframes pp-citem{from{transform:translateX(60px) rotate(4deg);opacity:0}to{transform:none;opacity:1}}
+.pp-citem img{width:76px;height:76px;border-radius:14px;object-fit:cover;border:2px solid var(--ink)}
+.pp-citem strong{display:block;font:800 1rem/1.15 var(--f-display);text-transform:uppercase}
+.pp-qty{display:inline-flex;align-items:center;gap:8px;margin-top:8px;border:2px solid var(--ink);border-radius:999px;padding:2px;background:var(--paper)}
+.pp-qty button{width:30px;height:30px;border-radius:50%;font-weight:800}
+.pp-qty button:hover{background:var(--yellow)}
+.pp-citem__rm{font-weight:800;font-size:.8rem;text-decoration:underline}
+.pp-drawer__foot{padding:18px 20px 20px;border-top:var(--bw) solid var(--ink);background:var(--cream)}
+.pp-drawer__sub{display:flex;justify-content:space-between;font:800 1.2rem/1 var(--f-display);text-transform:uppercase;margin-bottom:14px}
+.pp-drawer__foot .pp-btn{width:100%}
+.pp-toast{position:fixed;left:50%;bottom:24px;z-index:130;translate:-50% 0;transform:translateY(160%);background:var(--ink);color:var(--yellow);padding:14px 22px;border-radius:999px;font:800 .95rem/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--orange);transition:transform .6s var(--ease-spring);display:flex;gap:10px;align-items:center}
+.pp-toast.is-show{transform:none}
+.pp-toast svg{width:20px;height:20px;color:var(--orange)}
+.pp-flyer{position:fixed;z-index:140;border-radius:50%;border:3px solid var(--ink);object-fit:cover;pointer-events:none;transition:transform .8s var(--ease-io),opacity .8s}
+
+/* ===================== SEARCH ===================== */
+.pp-search{position:fixed;inset:0 0 auto 0;z-index:96;background:var(--yellow);border-bottom:var(--bw) solid var(--ink);border-radius:0 0 40px 40px;padding:100px var(--gutter) 44px;transform:translateY(-110%);transition:transform .7s var(--ease-spring);box-shadow:0 10px 0 var(--ink)}
+.pp-search.is-open{transform:none}
+.pp-search form{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;border-bottom:4px solid var(--ink)}
+.pp-search input{flex:1;min-width:0;border:0;background:transparent;font:800 clamp(1.8rem,5vw,3.4rem)/1.2 var(--f-display);font-stretch:80%;text-transform:uppercase;color:var(--ink);padding:10px 0}
+.pp-search input::placeholder{color:rgba(42,28,20,.4)}
+.pp-search input:focus{outline:none}
+.pp-search__chips{max-width:900px;margin:22px auto 0;display:flex;flex-wrap:wrap;gap:10px}
+.pp-search__chips a{transition:transform .4s var(--ease-spring),background-color .2s}
+.pp-search__chips a:hover{transform:translateY(-3px) rotate(-3deg);background:var(--paper)}
+.pp-search__close{position:absolute;top:24px;right:var(--gutter)}
+
+/* ===================== CURSOR FOLLOWER ===================== */
+.pp-cursor{position:fixed;left:0;top:0;z-index:150;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:grid;place-items:center;text-align:center;font:800 .72rem/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;transform:translate(var(--cx,-200px),var(--cy,-200px)) scale(0);transition:transform .08s linear;box-shadow:var(--pop-sm)}
+.pp-cursor.is-on{transform:translate(var(--cx),var(--cy)) scale(1)}
+.pp-cursor__inner{transition:transform .45s var(--ease-spring);display:grid;gap:4px;place-items:center}
+.pp-cursor svg{width:24px;height:24px;color:var(--orange)}
+.pp-cursor-scale{transition:scale .45s var(--ease-spring)}
+.pp-trail-paw{position:fixed;width:22px;height:22px;color:var(--ink);opacity:0;pointer-events:none;z-index:40;animation:pp-pawstep 2.2s ease-out forwards}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:1100px){
+  .pp-nav__links a{padding:10px 10px}
+  .pp-catgrid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .pp-cat--collars{grid-column:span 6;grid-row:span 1;min-height:420px}
+  .pp-cat--bandanas,.pp-cat--bowties,.pp-cat--leashes,.pp-cat--harnesses{grid-column:span 3}
+  .pp-cat--tags{grid-column:span 6}
+  .pp-cat--cta{grid-column:span 6}
+  .pp-foot__grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:980px){
+  .pp-nav__links,.pp-nav__cta,.pp-nav__acct{display:none}
+  .pp-burger{display:block}
+  .pp-hero{grid-template-columns:1fr;padding-top:118px;gap:34px;text-align:left}
+  .pp-hero__visual{justify-self:center;max-width:520px;width:92%;max-height:none}
+  .pp-about__grid{grid-template-columns:1fr}
+  .pp-collage{margin-inline:auto;width:92%}
+  .pp-panel{grid-template-columns:1fr}
+  .pp-panel__img{max-width:520px;aspect-ratio:5/4;max-height:none}
+  .pp-social__head{grid-template-columns:1fr}
+  .pp-igrid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(170px,44vw,280px)}
+  .pp-ig--wide{grid-column:span 2}
+  .pp-camp__foot{grid-template-columns:1fr}
+  .pp-cats__head{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:720px){
+  .pp{font-size:1rem}
+  .pp-logo{font-size:1.1rem;gap:8px}
+  .pp-logo__mark{width:38px;height:38px}
+  .pp-nav{padding:7px 7px 7px 10px}
+  .pp-iconbtn{width:44px;height:44px}
+  .pp-nav__search{display:none}
+  .pp-hero{padding-bottom:90px}
+  .pp-hero__ctas .pp-btn{flex:1 1 100%}
+  .pp-hero__bubble{right:-4%;top:0;font-size:.9rem}
+  .pp-hero__badge{min-width:100px}
+  .pp-acc--hide-sm{display:none}
+  .pp-scrollcue{display:none}
+  .pp-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .pp-stat{padding:12px 10px;border-radius:18px}
+  .pp-stat__l{font-size:.62rem}
+  /* categories: swipe row */
+  .pp-catgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding:14px var(--gutter) 30px;margin:0 calc(var(--gutter)*-1);scrollbar-width:none}
+  .pp-catgrid::-webkit-scrollbar{display:none}
+  .pp-cat{flex:none;width:80vw;min-height:430px;scroll-snap-align:center}
+  .pp-cat--collars{min-height:430px}
+  .pp-cat__img{width:70%!important;right:-12%!important;bottom:-10%!important}
+  .pp-swipehint{display:flex!important}
+  .pp-camp__dog{width:56vw}
+  .pp-camp__line{font-size:clamp(5rem,26vw,9rem)}
+  .pp-review{width:82vw}
+  .pp-reviews__ctrls .pp-roundbtn{width:52px;height:52px}
+  .pp-igrid{gap:12px}
+  .pp-ig--tall{grid-row:span 2}
+  .pp-ig__over{padding:10px 12px;left:8px;right:8px;bottom:8px}
+  .pp-ig__over span{display:none}
+  .pp-form__row{flex-direction:column;border-radius:30px}
+  .pp-form .pp-btn{width:100%}
+  .pp-form input{text-align:center}
+  .pp-foot__grid{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .pp-foot__brand{grid-column:1/-1}
+}
+.pp-swipehint{display:none;align-items:center;gap:10px;font:800 .75rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+.pp-swipehint svg{width:60px;height:24px;animation:pp-wiggle 1.8s ease-in-out infinite}
+@media (hover:none){.pp-cursor{display:none}}
+
+/* ===================== REDUCED MOTION ===================== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pp *,.pp *::before,.pp *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .pp-pawtrail,.pp-cursor{display:none}
+}
+</style>
+</head>
+<body>
+<div class="pp" id="pp-site">
+
+<!-- ============ SVG SPRITE (all doodles/accessories) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-paw" viewBox="0 0 100 100"><ellipse cx="20" cy="42" rx="10" ry="13" transform="rotate(-20 20 42)"/><ellipse cx="38" cy="22" rx="10" ry="13" transform="rotate(-8 38 22)"/><ellipse cx="62" cy="22" rx="10" ry="13" transform="rotate(8 62 22)"/><ellipse cx="80" cy="42" rx="10" ry="13" transform="rotate(20 80 42)"/><path d="M50 46c-14 0-28 18-28 30 0 9 7 13 15 13 6 0 9-3 13-3s7 3 13 3c8 0 15-4 15-13 0-12-14-30-28-30z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 100 100"><path d="M50 4l13 31 33 3-25 22 8 33-29-18-29 18 8-33L4 38l33-3z" stroke="#2A1C14" stroke-width="5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-starflat" viewBox="0 0 100 100"><path d="M50 4l13 31 33 3-25 22 8 33-29-18-29 18 8-33L4 38l33-3z"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 100 100"><path d="M50 2C54 34 66 46 98 50 66 54 54 66 50 98 46 66 34 54 2 50 34 46 46 34 50 2z" stroke="#2A1C14" stroke-width="5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 100 100"><path d="M50 88C20 66 6 50 6 32 6 18 17 8 30 8c10 0 16 6 20 14 4-8 10-14 20-14 13 0 24 10 24 24 0 18-14 34-44 56z"/></symbol>
+    <symbol id="i-heart-o" viewBox="0 0 100 100"><path d="M50 88C20 66 6 50 6 32 6 18 17 8 30 8c10 0 16 6 20 14 4-8 10-14 20-14 13 0 24 10 24 24 0 18-14 34-44 56z" stroke="#2A1C14" stroke-width="6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bone" viewBox="0 0 124 54"><g stroke="#2A1C14" stroke-width="5"><circle cx="18" cy="16" r="13"/><circle cx="18" cy="38" r="13"/><circle cx="106" cy="16" r="13"/><circle cx="106" cy="38" r="13"/></g><rect x="16" y="15" width="92" height="24" rx="4" stroke="#2A1C14" stroke-width="5"/><g><circle cx="18" cy="16" r="10.5"/><circle cx="18" cy="38" r="10.5"/><circle cx="106" cy="16" r="10.5"/><circle cx="106" cy="38" r="10.5"/><rect x="18" y="17.5" width="88" height="19"/></g></symbol>
+    <symbol id="i-tag" viewBox="0 0 100 120"><circle cx="50" cy="16" r="11" fill="none" stroke="#2A1C14" stroke-width="5"/><path d="M50 30c22 0 40 18 40 40s-18 44-40 44S10 92 10 70s18-40 40-40z" stroke="#2A1C14" stroke-width="5"/><circle cx="50" cy="42" r="5" fill="#2A1C14"/><g fill="#2A1C14" transform="translate(32 56) scale(.36)"><use href="#i-paw"/></g></symbol>
+    <symbol id="i-collar" viewBox="0 0 130 140"><circle cx="65" cy="60" r="46" fill="none" stroke="#2A1C14" stroke-width="22"/><circle cx="65" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="15"/><circle cx="65" cy="60" r="46" fill="none" stroke="var(--b,#EDC558)" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 13"/><rect x="50" y="94" width="30" height="20" rx="5" fill="var(--b,#EDC558)" stroke="#2A1C14" stroke-width="4"/><circle cx="65" cy="124" r="13" fill="var(--t,#66BCB4)" stroke="#2A1C14" stroke-width="4"/></symbol>
+    <symbol id="i-bowtie" viewBox="0 0 124 74"><path d="M62 37L9 7Q1 37 9 67z" stroke="#2A1C14" stroke-width="5" stroke-linejoin="round"/><path d="M62 37l53-30q8 30 0 60z" stroke="#2A1C14" stroke-width="5" stroke-linejoin="round"/><g fill="var(--b,#E8CCAD)"><circle cx="24" cy="26" r="5"/><circle cx="22" cy="48" r="5"/><circle cx="40" cy="38" r="5"/><circle cx="100" cy="26" r="5"/><circle cx="102" cy="48" r="5"/><circle cx="84" cy="38" r="5"/></g><rect x="50" y="24" width="24" height="26" rx="8" fill="var(--b,#E8CCAD)" stroke="#2A1C14" stroke-width="5"/></symbol>
+    <symbol id="i-bandana" viewBox="0 0 124 96"><path d="M6 10Q62 24 118 10 96 54 62 90 28 54 6 10z" stroke="#2A1C14" stroke-width="5" stroke-linejoin="round"/><g fill="var(--b,#FBF4EC)"><circle cx="34" cy="28" r="4.5"/><circle cx="62" cy="34" r="4.5"/><circle cx="90" cy="28" r="4.5"/><circle cx="48" cy="50" r="4.5"/><circle cx="76" cy="50" r="4.5"/><circle cx="62" cy="68" r="4.5"/></g><path d="M8 10q-6-6-2-10M116 10q6-6 2-10" stroke="#2A1C14" stroke-width="4" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-leash" viewBox="0 0 120 130"><path d="M36 8C14 8 12 46 36 46S58 8 36 8z M36 46C44 82 80 74 90 104" fill="none" stroke="#2A1C14" stroke-width="13" stroke-linecap="round"/><path d="M36 8C14 8 12 46 36 46S58 8 36 8z M36 46C44 82 80 74 90 104" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><rect x="80" y="100" width="20" height="24" rx="6" fill="var(--b,#EDC558)" stroke="#2A1C14" stroke-width="4"/></symbol>
+    <symbol id="i-harness" viewBox="0 0 130 110"><path d="M18 34Q65 0 112 34L102 78Q65 102 28 78z" fill="none" stroke="#2A1C14" stroke-width="20" stroke-linejoin="round"/><path d="M18 34Q65 0 112 34L102 78Q65 102 28 78z" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><path d="M65 18V92" stroke="#2A1C14" stroke-width="20"/><path d="M65 18V92" stroke="currentColor" stroke-width="12"/><circle cx="65" cy="50" r="10" fill="var(--b,#EDC558)" stroke="#2A1C14" stroke-width="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 124 60"><path d="M5 42C30 10 62 56 100 22" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M84 16l18 4-6 17" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-s" viewBox="0 0 60 30"><path d="M3 15h48M38 4l13 11-13 11" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-squiggle" viewBox="0 0 200 30"><path d="M3 15q11-13 23 0t23 0 23 0 23 0 23 0 23 0 23 0 23 0" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></symbol>
+    <symbol id="i-scribble" viewBox="0 0 220 110"><path d="M24 60C18 22 196 8 202 52 208 96 32 104 14 66 4 42 66 14 136 18" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+    <symbol id="i-dog" viewBox="0 0 130 130"><ellipse cx="28" cy="56" rx="17" ry="32" transform="rotate(22 28 56)" fill="#EC802B" stroke="#2A1C14" stroke-width="5"/><ellipse cx="102" cy="56" rx="17" ry="32" transform="rotate(-22 102 56)" fill="#EC802B" stroke="#2A1C14" stroke-width="5"/><circle cx="65" cy="70" r="42" fill="#E8CCAD" stroke="#2A1C14" stroke-width="5"/><ellipse cx="82" cy="58" rx="12" ry="10" fill="#FBF4EC" opacity=".8"/><circle cx="49" cy="64" r="5.5" fill="#2A1C14"/><circle cx="81" cy="64" r="5.5" fill="#2A1C14"/><circle cx="51" cy="62" r="1.6" fill="#fff"/><circle cx="83" cy="62" r="1.6" fill="#fff"/><ellipse cx="65" cy="80" rx="9" ry="6.5" fill="#2A1C14"/><path d="M55 90q10 8 20 0" stroke="#2A1C14" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M60 93q5 16 10 0z" fill="#EC802B" stroke="#2A1C14" stroke-width="3"/><path d="M30 104q35 20 70 0l-6 14q-29 14-58 0z" fill="#66BCB4" stroke="#2A1C14" stroke-width="4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M4 21c1.4-4.2 4.4-6 8-6s6.6 1.8 8 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4.5 8h15l-1.3 12.2a1 1 0 0 1-1 .8H6.8a1 1 0 0 1-1-.8z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="17.3" cy="6.7" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M14 3c.5 3 2.5 4.8 5.5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M10.5 20.5l2-8.5M10.2 9.3c.5-1.8 3.8-2.4 4.8-.4 1 2-.6 4.6-2.6 4.4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-spinner" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 1-9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="pp-skip" href="#pp-main">Skip to content</a>
+
+<!-- Page curtain (load + page transitions) -->
+<div class="pp-curtain" aria-hidden="true"><span></span><span></span><span><svg class="pp-curtain__logo"><use href="#i-paw"/></svg></span></div>
+<div class="pp-progress" aria-hidden="true"><div class="pp-progress__bar"></div></div>
+
+<!-- ============ NAV ============ -->
+<header class="pp-nav" id="pp-nav">
+  <a class="pp-logo" href="#top" aria-label="Paws &amp; Pets home">
+    <span class="pp-logo__mark"><svg class="pp-icon" aria-hidden="true"><use href="#i-paw"/></svg></span>
+    <span>Paws<span class="pp-logo__amp">&amp;</span>Pets</span>
+  </a>
+  <nav aria-label="Main">
+    <ul class="pp-nav__links">
+      <li><a href="#collections" data-nav="collections">Shop</a></li>
+      <li><a href="#collections" data-nav="collections-2">Collections</a></li>
+      <li><a href="#about" data-nav="about">About</a></li>
+      <li><a href="#story" data-nav="story">Our Story</a></li>
+      <li><a href="#reviews" data-nav="reviews">Reviews</a></li>
+    </ul>
+  </nav>
+  <div class="pp-nav__right">
+    <button class="pp-iconbtn pp-nav__search" type="button" aria-label="Search" data-open-search><svg class="pp-icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+    <a class="pp-iconbtn pp-nav__acct" href="/my-account/" aria-label="Account"><svg class="pp-icon" aria-hidden="true"><use href="#i-user"/></svg></a>
+    <button class="pp-iconbtn pp-cartbtn" type="button" aria-label="Open cart, 0 items" data-open-cart>
+      <svg class="pp-icon" aria-hidden="true"><use href="#i-bag"/></svg>
+      <span class="pp-cartcount" aria-hidden="true">0</span>
+    </button>
+    <a class="pp-btn pp-btn--orange pp-nav__cta" href="#collections" data-magnetic>Shop now</a>
+    <button class="pp-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="pp-menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="pp-menu" id="pp-menu" aria-hidden="true">
+  <nav class="pp-menu__links" aria-label="Mobile">
+    <a href="#collections" style="--i:0">Shop</a>
+    <a href="#collections" style="--i:1">Collections</a>
+    <a href="#about" style="--i:2">About</a>
+    <a href="#story" style="--i:3">Our Story</a>
+    <a href="#reviews" style="--i:4">Reviews</a>
+  </nav>
+  <div class="pp-menu__foot">
+    <button class="pp-sticker pp-sticker--paper" type="button" data-open-search style="--rot:-3deg"><svg class="pp-icon" aria-hidden="true"><use href="#i-search"/></svg> Search</button>
+    <a class="pp-sticker pp-sticker--teal" href="/my-account/" style="--rot:2deg"><svg class="pp-icon" aria-hidden="true"><use href="#i-user"/></svg> Account</a>
+    <a class="pp-sticker" href="#" style="--rot:-1deg"><svg class="pp-icon" aria-hidden="true"><use href="#i-ig"/></svg> @pawsandpets</a>
+  </div>
+  <svg class="pp-menu__deco pp-spin" aria-hidden="true"><use href="#i-sparkle"/></svg>
+</div>
+
+<main id="pp-main">
+
+<!-- ============ HERO ============ -->
+<section class="pp-hero" id="top" aria-label="Paws &amp; Pets — Let their personality out">
+  <div class="pp-hero__bg" aria-hidden="true"></div>
+
+  <div class="pp-hero__text">
+    <div class="pp-hero__kicker" data-seq style="--sd:.85s">
+      <span class="pp-sticker pp-sticker--teal" style="--rot:-3deg"><svg class="pp-icon pp-spin" aria-hidden="true"><use href="#i-sparkle"/></svg> Season 03 · The show-off edit</span>
+    </div>
+    <h1 class="pp-hero__title" aria-label="Let their personality out.">
+      <span class="ln ln--sm" aria-hidden="true"><span class="wd" style="--i:0">Let</span> <span class="wd" style="--i:1">their</span></span>
+      <span class="ln ln--big" aria-hidden="true"><span class="wd pp-stroke" style="--i:2">Personality</span></span>
+      <span class="ln ln--sm" aria-hidden="true"><span class="wd wd--out" style="--i:3">out.</span><span class="ln-sticker pp-pop-in" style="--sd:1.9s"><svg class="pp-spin"><use href="#i-starflat"/></svg></span></span>
+    </h1>
+    <p class="pp-hero__copy" data-seq style="--sd:1.45s">Collars, bandanas, bow ties &amp; more for dogs with big main-character energy. Colourful, comfy and completely them.</p>
+    <div class="pp-hero__ctas" data-seq style="--sd:1.6s">
+      <a class="pp-btn pp-btn--orange" href="#collections" data-magnetic>Shop the drop <span class="pp-arrow" aria-hidden="true">→</span><svg class="pp-btn__paw" aria-hidden="true"><use href="#i-paw"/></svg></a>
+      <a class="pp-btn" href="#about" data-magnetic>Explore Paws &amp; Pets</a>
+    </div>
+    <div class="pp-hero__proof" data-seq style="--sd:1.75s">
+      <div class="pp-avatars" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="44" height="44" data-tone="yellow">
+        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="44" height="44" data-tone="teal">
+        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="44" height="44" data-tone="orange">
+      </div>
+      <div>
+        <div class="pp-stars" role="img" aria-label="Rated 5 out of 5"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+        <span>Worn by 12,000+ very stylish dogs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pp-hero__visual" data-cursor="Boop!">
+    <div class="pp-hero__sun pp-pop-in" style="--sd:.75s" aria-hidden="true"></div>
+    <div class="pp-hero__blob" aria-hidden="true"></div>
+    <figure class="pp-hero__photo" data-depth="-10">
+      <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1000&q=72" alt="A happy dog looking at the camera, ready to show off a new accessory" width="1000" height="1250" fetchpriority="high" decoding="async" data-tone="teal">
+    </figure>
+
+    <!-- floating accessories (bounce in one by one) -->
+    <div class="pp-float pp-acc pp-acc--hide-sm" data-depth="26" data-speed="-.12" style="left:-7%;top:16%;width:24%" aria-hidden="true"><div class="pp-bob" style="--bd:-1s"><svg class="pp-pop-in" style="--sd:1.55s;color:var(--teal);--b:var(--yellow)" viewBox="0 0 130 140"><use href="#i-collar"/></svg></div></div>
+    <div class="pp-float pp-acc" data-depth="34" data-speed=".1" style="right:-6%;top:40%;width:24%" aria-hidden="true"><div class="pp-bob" style="--bd:-2.5s;--bd-dur:5s"><svg class="pp-pop-in" style="--sd:1.7s;color:var(--yellow);--b:var(--orange)" viewBox="0 0 124 74"><use href="#i-bowtie"/></svg></div></div>
+    <div class="pp-float pp-acc pp-acc--hide-sm" data-depth="18" data-speed="-.08" style="left:40%;top:-4%;width:20%" aria-hidden="true"><div class="pp-bob" style="--bd:-4s;--bd-dur:7s"><svg class="pp-pop-in" style="--sd:1.85s;color:var(--teal);--b:var(--paper)" viewBox="0 0 124 96"><use href="#i-bandana"/></svg></div></div>
+    <div class="pp-float pp-acc" data-depth="40" data-speed=".16" style="right:4%;bottom:6%;width:22%" aria-hidden="true"><div class="pp-bob" style="--bd:-3s"><svg class="pp-pop-in" style="--sd:2s;color:var(--paper)" viewBox="0 0 124 54"><use href="#i-bone"/></svg></div></div>
+    <div class="pp-float pp-acc pp-acc--hide-sm" data-depth="22" data-speed="-.05" style="left:4%;bottom:26%;width:13%" aria-hidden="true"><div class="pp-bob" style="--bd:-1.6s;--bd-dur:5.5s"><svg class="pp-pop-in" style="--sd:2.12s;color:var(--yellow)" viewBox="0 0 100 120"><use href="#i-tag"/></svg></div></div>
+
+    <!-- decorative bits (appear one by one) -->
+    <div class="pp-float" data-depth="50" style="right:12%;top:2%;width:9%" aria-hidden="true"><svg class="pp-pop-in pp-spin" style="--sd:2.3s;color:var(--yellow);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-sparkle"/></svg></div>
+    <div class="pp-float" data-depth="30" style="left:-10%;top:52%;width:7%" aria-hidden="true"><svg class="pp-pop-in" style="--sd:2.4s;color:var(--orange);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-heart-o"/></svg></div>
+    <div class="pp-float" data-depth="44" style="right:-2%;top:26%;width:6%" aria-hidden="true"><svg class="pp-pop-in pp-spin--rev" style="--sd:2.5s;color:var(--teal);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-star"/></svg></div>
+    <div class="pp-float" data-depth="16" style="left:22%;bottom:-3%;width:8%" aria-hidden="true"><svg class="pp-pop-in" style="--sd:2.6s;color:var(--ink);opacity:.85;display:block;width:100%;height:auto;rotate:-18deg" viewBox="0 0 100 100"><use href="#i-paw"/></svg></div>
+
+    <div class="pp-hero__bubble pp-pop-in" style="--sd:2.2s"><span class="pp-bubble">woof. obviously.</span></div>
+    <div class="pp-hero__badge pp-pop-in" style="--sd:2.05s" aria-hidden="true">
+      <svg class="pp-spin" viewBox="0 0 200 200">
+        <defs><path id="pp-circ-a" d="M100 100m-70 0a70 70 0 1 1 140 0a70 70 0 1 1-140 0"/></defs>
+        <circle cx="100" cy="100" r="96" fill="#EDC558" stroke="#2A1C14" stroke-width="4"/>
+        <text font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="19" letter-spacing="2" fill="#2A1C14"><textPath href="#pp-circ-a" textLength="430">PAWS &amp; PETS ✦ DOG APPROVED ✦ PAWS &amp; PETS ✦ </textPath></text>
+        <g transform="translate(70 68) scale(.6)" fill="#EC802B" stroke="#2A1C14" stroke-width="4"><use href="#i-paw"/></g>
+      </svg>
+    </div>
+    <svg class="pp-hero__squiggle pp-pop-in" style="--sd:2.35s" viewBox="0 0 200 30" aria-hidden="true"><use href="#i-squiggle"/></svg>
+  </div>
+
+  <div class="pp-pawtrail" aria-hidden="true">
+    <span style="--i:0"><svg width="26" height="26"><use href="#i-paw"/></svg></span><span style="--i:1"><svg width="26" height="26"><use href="#i-paw"/></svg></span><span style="--i:2"><svg width="26" height="26"><use href="#i-paw"/></svg></span><span style="--i:3"><svg width="26" height="26"><use href="#i-paw"/></svg></span><span style="--i:4"><svg width="26" height="26"><use href="#i-paw"/></svg></span><span style="--i:5"><svg width="26" height="26"><use href="#i-paw"/></svg></span>
+  </div>
+  <a class="pp-scrollcue" href="#about" data-seq style="--sd:2.4s"><svg class="pp-icon" aria-hidden="true"><use href="#i-paw"/></svg> Scroll for zoomies</a>
+</section>
+
+<!-- ============ CROSSING TAPES ============ -->
+<div class="pp-tapes" aria-hidden="true">
+  <div class="pp-tape pp-tape--b"><div class="pp-marquee" data-marquee="1" data-speed=".25"></div></div>
+  <div class="pp-tape pp-tape--a"><div class="pp-marquee" data-marquee="-1" data-speed=".35"></div></div>
+  <template id="pp-tape-items"><div class="pp-marquee__item">Collars <svg class="pp-icon"><use href="#i-starflat"/></svg> Bandanas <svg class="pp-icon"><use href="#i-paw"/></svg> Bow ties <svg class="pp-icon"><use href="#i-heart"/></svg> Leashes <svg class="pp-icon"><use href="#i-starflat"/></svg> Harnesses <svg class="pp-icon"><use href="#i-paw"/></svg> Name tags <svg class="pp-icon"><use href="#i-heart"/></svg></div></template>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="pp-about" id="about" aria-labelledby="pp-about-title">
+  <div class="pp-wrap pp-about__grid">
+    <div class="pp-collage" data-cursor="Sniff">
+      <div class="pp-collage__block" data-reveal="left" aria-hidden="true"></div>
+      <figure class="pp-collage__main" data-reveal="clip" style="--d:.1s">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=70" alt="Two dogs running through a field mid-zoomies" width="900" height="1100" loading="lazy" decoding="async" data-speed-img data-tone="orange">
+      </figure>
+      <div class="pp-collage__polaroid" data-reveal="pop" style="--d:.45s">
+        <figure><img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=500&q=70" alt="A dog posing proudly for a portrait" width="500" height="500" loading="lazy" decoding="async" data-tone="teal"></figure>
+        <figcaption>chief stylist ♡</figcaption>
+      </div>
+      <span class="pp-sticker pp-sticker--teal" data-reveal="pop" style="--d:.6s;--rot:-8deg;left:-4%;top:12%"><svg class="pp-icon" aria-hidden="true"><use href="#i-paw"/></svg> Dog approved</span>
+      <span class="pp-sticker" data-reveal="pop" style="--d:.75s;--rot:6deg;right:4%;top:2%"><svg class="pp-icon pp-spin" aria-hidden="true"><use href="#i-sparkle"/></svg> Walk ready</span>
+      <span class="pp-sticker pp-sticker--orange" data-reveal="pop" style="--d:.9s;--rot:-3deg;left:20%;bottom:-2%">Personality required</span>
+      <div class="pp-float" data-speed="-.18" style="right:-6%;top:34%;width:13%" aria-hidden="true"><div class="pp-bob" style="--bd:-2s"><svg style="color:var(--yellow);display:block;width:100%;height:auto" viewBox="0 0 124 54"><use href="#i-bone"/></svg></div></div>
+    </div>
+
+    <div class="pp-about__text">
+      <span class="pp-eyebrow" data-reveal>01 — About us</span>
+      <h2 class="pp-h2" id="pp-about-title"><span data-split>More personality.</span> <span class="pp-it" data-split style="--d:.25s">Less boring.</span></h2>
+      <p class="pp-lead" data-reveal style="--d:.2s">Your dog isn't beige. Their accessories shouldn't be either.</p>
+      <p data-reveal style="--d:.3s">Paws &amp; Pets started with a simple, slightly dramatic belief: dog accessories should be as expressive and individual as the dogs wearing them. So we design collars, bandanas and bow ties in bold colour combos and cheeky prints — then make them comfy enough for every zoomie, puddle and dramatic sit-down-mid-walk.</p>
+      <p data-reveal style="--d:.4s">No boring basics. No scratchy bits. Just good stuff that makes strangers stop you on walks to ask, <em>“where did you get that?!”</em></p>
+      <div class="pp-stats">
+        <div class="pp-stat" data-reveal="pop" style="--d:.2s;--rot:-2deg"><span class="pp-stat__n" data-count="12" data-suffix="k+">0</span><span class="pp-stat__l">Good dogs dressed</span></div>
+        <div class="pp-stat" data-reveal="pop" style="--d:.32s;--rot:1.5deg"><span class="pp-stat__n" data-count="48" data-suffix="">0</span><span class="pp-stat__l">Colourways</span></div>
+        <div class="pp-stat" data-reveal="pop" style="--d:.44s;--rot:-1deg"><span class="pp-stat__n" data-count="0" data-suffix="">0</span><span class="pp-stat__l">Boring walks</span></div>
+      </div>
+      <a class="pp-link" href="#story" data-reveal style="--d:.5s">Read our story <svg width="40" height="20" aria-hidden="true"><use href="#i-arrow-s"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR STORY (horizontal on desktop) ============ -->
+<section class="pp-story" id="story" aria-label="Our story">
+  <div class="pp-story__sticky">
+    <div class="pp-story__track">
+      <article class="pp-panel pp-panel--intro">
+        <div>
+          <span class="pp-eyebrow" data-reveal>02 — Our story</span>
+          <h2 class="pp-h2" style="margin-top:18px"><span data-split>Our story,</span><br><span class="pp-it" data-split style="--d:.2s">in four walks.</span></h2>
+          <div class="pp-story__hint" aria-hidden="true">Keep scrolling <svg viewBox="0 0 124 60"><use href="#i-arrow"/></svg></div>
+        </div>
+        <div class="pp-float" data-speed=".2" style="right:8%;top:16%;width:clamp(90px,11vw,170px)" aria-hidden="true"><div class="pp-bob"><svg style="color:var(--yellow);display:block;width:100%;height:auto" class="pp-spin" viewBox="0 0 100 100"><use href="#i-sparkle"/></svg></div></div>
+        <div class="pp-float" style="right:22%;bottom:16%;width:clamp(90px,10vw,150px)" aria-hidden="true"><div class="pp-bob" style="--bd:-2s"><svg style="color:var(--orange);--b:var(--yellow);display:block;width:100%;height:auto" viewBox="0 0 130 140"><use href="#i-collar"/></svg></div></div>
+      </article>
+
+      <article class="pp-panel" style="--bg:var(--cream);--numc:var(--orange)">
+        <div>
+          <span class="pp-panel__num" aria-hidden="true">01</span>
+          <h3>It started with one very dramatic dog.</h3>
+          <p>Biscuit refused to wear anything boring. Plain collars? Ignored. Grey harness? Full lie-down protest. So we made her something loud, bright and a little bit extra — and she strutted.</p>
+        </div>
+        <div class="pp-panel__img" style="--rot:3deg;--shape:220px 220px 36px 36px" data-cursor="Hi Biscuit">
+          <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=800&q=70" alt="A dog sitting outdoors looking pleased with itself" width="800" height="1000" loading="lazy" decoding="async" data-tone="yellow">
+        </div>
+        <span class="pp-sticker pp-sticker--teal" style="--rot:-6deg;right:6%;top:14%">Est. on a walk</span>
+      </article>
+
+      <article class="pp-panel" style="--bg:var(--yellow);--numc:var(--teal)">
+        <div>
+          <span class="pp-panel__num" aria-hidden="true">02</span>
+          <h3>Tested by the toughest critics.</h3>
+          <p>Every buckle, stitch and print goes through our very strict panel: dogs who roll in things, chew things and sprint into the sea. If it survives them, it's ready for you.</p>
+        </div>
+        <div class="pp-panel__img" style="--rot:-3deg;--shape:50%" data-cursor="Approved">
+          <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?auto=format&fit=crop&w=800&q=70" alt="A dog playing happily on grass" width="800" height="1000" loading="lazy" decoding="async" data-tone="teal">
+        </div>
+        <span class="pp-sticker pp-sticker--orange" style="--rot:5deg;right:10%;bottom:16%">Zoomie-proof</span>
+      </article>
+
+      <article class="pp-panel" style="--bg:var(--teal);--numc:var(--yellow)">
+        <div>
+          <span class="pp-panel__num" aria-hidden="true">03</span>
+          <h3>Then we made it fun.</h3>
+          <p>Colour blocking, polka dots, tiny bow ties for big occasions. Soft webbing, rounded edges and sizes for every shape — from smol to absolutely enormous.</p>
+        </div>
+        <div class="pp-panel__img" style="--rot:2deg;--shape:40px 180px 40px 180px" data-cursor="So cute">
+          <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=800&q=70" alt="A cheerful dog close-up with its tongue out" width="800" height="1000" loading="lazy" decoding="async" data-tone="orange">
+        </div>
+        <span class="pp-sticker" style="--rot:-4deg;right:8%;top:12%"><svg class="pp-icon" aria-hidden="true"><use href="#i-heart"/></svg> Made with love</span>
+      </article>
+
+      <article class="pp-panel" style="--bg:var(--orange);--numc:var(--cream)">
+        <div>
+          <span class="pp-panel__num" aria-hidden="true">04</span>
+          <h3>Now it's your dog's turn.</h3>
+          <p style="margin-bottom:26px">Pick their mood, find their colour and get ready for a lot more compliments on walks.</p>
+          <a class="pp-btn pp-btn--yellow" href="#collections" data-magnetic>Pick their mood <span class="pp-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="pp-panel__img" style="--rot:-2deg;--shape:36px" data-cursor="Let's go">
+          <img src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&w=800&q=70" alt="A dog walking happily on a leash" width="800" height="1000" loading="lazy" decoding="async" data-tone="yellow">
+        </div>
+      </article>
+    </div>
+    <div class="pp-story__bar" aria-hidden="true"><span></span><i><svg><use href="#i-paw"/></svg></i></div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="pp-cats" id="collections" aria-labelledby="pp-cats-title">
+  <div class="pp-wrap">
+    <div class="pp-cats__head">
+      <div>
+        <span class="pp-eyebrow" data-reveal>03 — Collections</span>
+        <h2 class="pp-h2" id="pp-cats-title" style="margin-top:16px"><span data-split>Pick their</span> <span class="pp-it" data-split style="--d:.2s">mood.</span></h2>
+      </div>
+      <div>
+        <p data-reveal style="--d:.2s">Fancy? Sporty? Chaotic but charming? Six categories, endless combos. Mix, match &amp; show off.</p>
+        <div class="pp-swipehint" aria-hidden="true">Swipe <svg viewBox="0 0 60 30"><use href="#i-arrow-s"/></svg></div>
+      </div>
+    </div>
+
+    <div class="pp-catgrid">
+      <!-- Swap each href for your WordPress/WooCommerce category URL, e.g. /product-category/collars/ -->
+      <a class="pp-cat pp-cat--collars" href="#collections" data-tilt data-reveal style="--d:0s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 01</span><h3 class="pp-cat__name">Collars</h3><p class="pp-cat__tag">Everyday, but make it fun.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=70" alt="Golden retriever wearing a collar" width="800" height="800" loading="lazy" decoding="async" data-tone="yellow"></figure>
+        <div class="pp-cat__acc" style="left:7%;bottom:20%" aria-hidden="true"><svg viewBox="0 0 130 140" style="color:var(--teal);--b:var(--yellow)"><use href="#i-collar"/></svg></div>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--bandanas" href="#collections" data-tilt data-reveal style="--d:.1s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 02</span><h3 class="pp-cat__name">Bandanas</h3><p class="pp-cat__tag">Instant personality upgrade.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=600&q=70" alt="A fluffy dog ready for a bandana" width="600" height="600" loading="lazy" decoding="async" data-tone="orange"></figure>
+        <div class="pp-cat__acc" style="right:42%;bottom:12%;width:70px" aria-hidden="true"><svg viewBox="0 0 124 96" style="color:var(--orange);--b:var(--paper)"><use href="#i-bandana"/></svg></div>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--bowties" href="#collections" data-tilt data-reveal style="--d:.2s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 03</span><h3 class="pp-cat__name">Bow ties</h3><p class="pp-cat__tag">For their fancy moments.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=70" alt="French bulldog looking dapper" width="600" height="600" loading="lazy" decoding="async" data-tone="teal"></figure>
+        <div class="pp-cat__acc" style="left:8%;bottom:26%;width:70px" aria-hidden="true"><svg viewBox="0 0 124 74" style="color:var(--teal);--b:var(--paper)"><use href="#i-bowtie"/></svg></div>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--leashes" href="#collections" data-tilt data-reveal style="--d:.1s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 04</span><h3 class="pp-cat__name">Leashes</h3><p class="pp-cat__tag">Walks, but better.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?auto=format&fit=crop&w=600&q=70" alt="Dog out on a walk" width="600" height="600" loading="lazy" decoding="async" data-tone="orange"></figure>
+        <div class="pp-cat__acc" style="left:38%;bottom:14%;width:64px" aria-hidden="true"><svg viewBox="0 0 120 130" style="color:var(--orange);--b:var(--teal)"><use href="#i-leash"/></svg></div>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--harnesses" href="#collections" data-tilt data-reveal style="--d:.2s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 05</span><h3 class="pp-cat__name">Harnesses</h3><p class="pp-cat__tag">Comfy enough for all the zoomies.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=600&q=70" alt="Dog ready for an adventure" width="600" height="600" loading="lazy" decoding="async" data-tone="yellow"></figure>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--tags" href="#collections" data-tilt data-reveal style="--d:.1s" data-cursor="Explore">
+        <div class="pp-cat__top"><span class="pp-cat__num">no. 06</span><h3 class="pp-cat__name">Name tags</h3><p class="pp-cat__tag">Cute. Useful. Very them.</p></div>
+        <span class="pp-cat__go">Explore <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <figure class="pp-cat__img"><img src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&w=600&q=70" alt="Puppy portrait close-up" width="600" height="600" loading="lazy" decoding="async" data-tone="teal"></figure>
+        <div class="pp-cat__acc" style="left:46%;top:18%;width:66px" aria-hidden="true"><div class="pp-bob"><svg viewBox="0 0 100 120" style="color:var(--orange)"><use href="#i-tag"/></svg></div></div>
+        <svg class="pp-cat__paw" aria-hidden="true"><use href="#i-paw"/></svg>
+      </a>
+      <a class="pp-cat pp-cat--cta" href="#collections" data-tilt data-reveal style="--d:.2s" data-cursor="All of it">
+        <span class="pp-sticker pp-sticker--teal" style="--rot:-4deg">Can't decide?</span>
+        <h3 class="pp-cat__name">All of them.<br><span class="pp-it" style="color:var(--paper)">obviously.</span></h3>
+        <span class="pp-cat__go">Shop everything <svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></span>
+        <svg class="pp-cat__paw" aria-hidden="true" style="color:var(--yellow)"><use href="#i-paw"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMPAIGN ============ -->
+<section class="pp-camp" aria-labelledby="pp-camp-title">
+  <h2 class="pp-sr" id="pp-camp-title">Boring? We don't know her.</h2>
+  <div class="pp-wrap pp-camp__eyebrow">
+    <span class="pp-eyebrow" data-reveal>04 — The campaign</span>
+    <span class="pp-sticker pp-sticker--paper" data-reveal="pop" style="--rot:3deg">★ Season 03 is here</span>
+  </div>
+  <div class="pp-camp__lines" aria-hidden="true">
+    <div class="pp-camp__line pp-camp__line--a"><div class="pp-marquee" data-marquee="-1" data-speed=".6" data-drift=".25"></div></div>
+    <div class="pp-camp__line pp-camp__line--b"><div class="pp-marquee" data-marquee="1" data-speed=".6" data-drift=".25"></div></div>
+    <template id="pp-camp-a"><div class="pp-marquee__item">Boring? <svg class="pp-icon"><use href="#i-starflat"/></svg> Boring? <svg class="pp-icon"><use href="#i-paw"/></svg></div></template>
+    <template id="pp-camp-b"><div class="pp-marquee__item"><span class="fill">We don't</span> know her. <svg class="pp-icon"><use href="#i-heart"/></svg></div></template>
+
+    <div class="pp-camp__dog" data-cursor="Iconic">
+      <div class="pp-camp__ring"><svg class="pp-spin" viewBox="0 0 200 200"><defs><path id="pp-circ-b" d="M100 100m-88 0a88 88 0 1 1 176 0a88 88 0 1 1-176 0"/></defs><circle cx="100" cy="100" r="99" fill="#EDC558" stroke="#2A1C14" stroke-width="2.5"/><text font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="13" letter-spacing="1.5" fill="#2A1C14"><textPath href="#pp-circ-b" textLength="548">NEW SEASON ✦ MAIN CHARACTER ENERGY ✦ NEW SEASON ✦ MAIN CHARACTER ENERGY ✦ </textPath></text></svg></div>
+      <figure><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=800&q=72" alt="" width="800" height="800" loading="lazy" decoding="async" data-tone="teal"></figure>
+    </div>
+    <div class="pp-float" data-speed="-.25" style="left:8%;top:6%;width:clamp(80px,10vw,150px)"><div class="pp-bob"><svg style="color:var(--teal);--b:var(--paper);display:block;width:100%;height:auto;filter:drop-shadow(4px 5px 0 #2A1C14)" viewBox="0 0 124 74"><use href="#i-bowtie"/></svg></div></div>
+    <div class="pp-float" data-speed=".22" style="right:9%;bottom:4%;width:clamp(90px,11vw,170px)"><div class="pp-bob" style="--bd:-2s"><svg style="color:var(--paper);display:block;width:100%;height:auto;filter:drop-shadow(4px 5px 0 #2A1C14)" viewBox="0 0 124 54"><use href="#i-bone"/></svg></div></div>
+    <div class="pp-float" data-speed="-.15" style="right:20%;top:2%;width:clamp(50px,5vw,80px)"><svg class="pp-spin" style="color:var(--yellow);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-sparkle"/></svg></div>
+    <div class="pp-float" data-speed=".3" style="left:22%;bottom:8%;width:clamp(40px,4vw,64px)"><svg style="color:var(--teal);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-heart-o"/></svg></div>
+  </div>
+  <div class="pp-wrap pp-camp__foot">
+    <p data-reveal>Beige is a background colour, not a personality. Season 03 is all colour-blocked collars, polka-dot bow ties and bandanas loud enough to be heard from the other side of the park.</p>
+    <div data-reveal style="--d:.15s"><a class="pp-btn pp-btn--ink" href="#collections" data-magnetic>See the season <span class="pp-arrow" aria-hidden="true">→</span></a></div>
+  </div>
+  <div class="pp-band" aria-hidden="true"><div class="pp-marquee" data-marquee="-1" data-speed=".3"></div>
+    <template id="pp-band-items"><div class="pp-marquee__item">Paws &amp; Pets <svg class="pp-icon"><use href="#i-paw"/></svg> Paws &amp; Pets <svg class="pp-icon"><use href="#i-starflat"/></svg></div></template>
+  </div>
+</section>
+
+<!-- ============ ZONE: testimonials + social (bg morphs yellow → cream) ============ -->
+<div class="pp-zone" id="pp-zone">
+
+<section class="pp-reviews" id="reviews" data-zone="#EDC558" aria-labelledby="pp-rev-title">
+  <div class="pp-wrap pp-reviews__head">
+    <div>
+      <span class="pp-eyebrow" data-reveal>05 — Reviews</span>
+      <h2 class="pp-h2" id="pp-rev-title" style="margin-top:16px"><span data-split>The pack</span> <span class="pp-it" data-split style="--d:.2s">has spoken.</span></h2>
+    </div>
+    <div class="pp-reviews__ctrls" data-reveal style="--d:.2s">
+      <span class="pp-sticker pp-sticker--paper" style="--rot:-3deg"><svg class="pp-icon" style="color:var(--orange)" aria-hidden="true"><use href="#i-starflat"/></svg> 4.9 / 5 · 3,200+ reviews</span>
+      <button class="pp-roundbtn pp-roundbtn--prev" type="button" aria-label="Previous reviews" data-track-prev><svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></button>
+      <button class="pp-roundbtn" type="button" aria-label="Next reviews" data-track-next><svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></button>
+    </div>
+  </div>
+
+  <div class="pp-track" id="pp-track" tabindex="0" aria-label="Customer reviews, scroll horizontally">
+    <article class="pp-review" style="--c:var(--teal);--rot:-2.5deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=700&q=70" alt="Mango the dog wearing her bandana" width="700" height="560" loading="lazy" decoding="async" data-tone="yellow"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">Mango gets stopped on every single walk now. She's basically a local celebrity. The bandana survived a mud puddle and a very enthusiastic beach day.</p>
+      <div class="pp-review__who"><div><strong>Priya &amp; Mango</strong><span>Indie, 3 yrs</span></div><span class="pp-chip">Sunset Bandana</span></div>
+      <svg class="pp-review__deco" aria-hidden="true"><use href="#i-paw"/></svg>
+    </article>
+    <article class="pp-review pp-review--circle" style="--c:var(--paper);--rot:2deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=70" alt="Pickle the dog in a bow tie" width="300" height="300" loading="lazy" decoding="async" data-tone="orange"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">Bought the bow tie for my sister's wedding. Pickle got more compliments than the bride. No regrets. Okay, slight regrets. Mostly none.</p>
+      <div class="pp-review__who"><div><strong>Sam &amp; Pickle</strong><span>Pug, 5 yrs</span></div><span class="pp-chip">Dotty Bow Tie</span></div>
+      <svg class="pp-review__deco pp-review__deco--bone" viewBox="0 0 124 54" aria-hidden="true"><use href="#i-bone"/></svg>
+    </article>
+    <article class="pp-review" style="--c:var(--orange);--rot:-1.5deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=70" alt="Bruno the dog wearing a harness" width="700" height="560" loading="lazy" decoding="async" data-tone="teal"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon" style="color:var(--yellow)"><use href="#i-starflat"/></svg><svg class="pp-icon" style="color:var(--yellow)"><use href="#i-starflat"/></svg><svg class="pp-icon" style="color:var(--yellow)"><use href="#i-starflat"/></svg><svg class="pp-icon" style="color:var(--yellow)"><use href="#i-starflat"/></svg><svg class="pp-icon" style="color:var(--yellow)"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">Finally a harness that doesn't rub and doesn't look like hiking gear. Bruno pulls like a tractor and it hasn't budged.</p>
+      <div class="pp-review__who"><div><strong>Aarav &amp; Bruno</strong><span>Labrador, 4 yrs</span></div><span class="pp-chip">Zoomies Harness</span></div>
+      <svg class="pp-review__deco" style="color:var(--yellow)" aria-hidden="true"><use href="#i-heart"/></svg>
+    </article>
+    <article class="pp-review pp-review--circle" style="--c:var(--cream);--rot:3deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=300&q=70" alt="Noodle the dog with her name tag" width="300" height="300" loading="lazy" decoding="async" data-tone="yellow"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">The name tag is SO cute and the engraving is crisp. Noodle jingles a little less and looks a lot more fabulous.</p>
+      <div class="pp-review__who"><div><strong>Leah &amp; Noodle</strong><span>Dachshund, 2 yrs</span></div><span class="pp-chip">Bone Name Tag</span></div>
+      <svg class="pp-review__deco" style="color:var(--teal)" aria-hidden="true"><use href="#i-paw"/></svg>
+    </article>
+    <article class="pp-review" style="--c:var(--teal);--rot:-3deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&w=700&q=70" alt="Toffee the dog on a walk with a colourful leash" width="700" height="560" loading="lazy" decoding="async" data-tone="orange"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">Matching collar and leash set = instant upgrade. The colours are even brighter in person. Toffee walks taller. I swear.</p>
+      <div class="pp-review__who"><div><strong>Kabir &amp; Toffee</strong><span>Beagle, 6 yrs</span></div><span class="pp-chip">Colour Pop Set</span></div>
+      <svg class="pp-review__deco pp-review__deco--bone" viewBox="0 0 124 54" aria-hidden="true" style="color:var(--yellow)"><use href="#i-bone"/></svg>
+    </article>
+    <article class="pp-review pp-review--circle" style="--c:var(--paper);--rot:1.5deg" data-reveal="right" >
+      <div class="pp-review__img"><img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=70" alt="Pudding the dog showing off a collar" width="300" height="300" loading="lazy" decoding="async" data-tone="teal"></div>
+      <div class="pp-stars" role="img" aria-label="5 out of 5 stars"><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg><svg class="pp-icon"><use href="#i-starflat"/></svg></div>
+      <p class="pp-review__q">Packaging was adorable, delivery was fast and Pudding's new collar is basically her whole personality now.</p>
+      <div class="pp-review__who"><div><strong>Maya &amp; Pudding</strong><span>Frenchie, 1 yr</span></div><span class="pp-chip">Tangerine Collar</span></div>
+      <svg class="pp-review__deco" aria-hidden="true"><use href="#i-heart"/></svg>
+    </article>
+  </div>
+  <div class="pp-trackbar" aria-hidden="true"><span></span></div>
+</section>
+
+<section class="pp-social" id="community" data-zone="#E8CCAD" aria-labelledby="pp-soc-title">
+  <div class="pp-wrap">
+    <div class="pp-social__head">
+      <div>
+        <span class="pp-eyebrow" data-reveal>06 — #PawsAndPets</span>
+        <h2 class="pp-h2" id="pp-soc-title" style="margin-top:16px"><span data-split>Spotted:</span> <span class="pp-it" data-split style="--d:.2s">very good style.</span></h2>
+      </div>
+      <div data-reveal style="--d:.2s"><a class="pp-btn pp-btn--teal" href="#" data-magnetic>Follow the pack <span class="pp-arrow" aria-hidden="true">→</span><svg class="pp-btn__paw" aria-hidden="true"><use href="#i-paw"/></svg></a></div>
+    </div>
+
+    <div class="pp-igrid">
+      <figure class="pp-ig pp-ig--tall" tabindex="0" style="--rot:-1.5deg;--oc:var(--yellow)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&h=900&q=70" alt="Two dogs running together on a walk" width="600" height="900" loading="lazy" decoding="async" data-tone="teal">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Ollie &amp; Juno</strong><span>Twin teal collars</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Ollie and Juno's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>1.2k</b></button></figcaption>
+      </figure>
+      <figure class="pp-ig pp-ig--wide" tabindex="0" style="--rot:1deg;--oc:var(--teal)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=900&h=450&q=70" alt="Dog playing outside" width="900" height="450" loading="lazy" decoding="async" data-tone="orange">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Biscuit</strong><span>Sunset Bandana</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Biscuit's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>986</b></button></figcaption>
+      </figure>
+      <figure class="pp-ig" tabindex="0" style="--rot:2deg;--oc:var(--cream)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?auto=format&fit=crop&w=600&h=600&q=70" alt="Dog with a funny expression" width="600" height="600" loading="lazy" decoding="async" data-tone="yellow">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Dosa</strong><span>Dotty Bow Tie</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Dosa's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>742</b></button></figcaption>
+      </figure>
+      <div class="pp-ig pp-ig--note" style="--rot:-2deg" data-reveal="pop">
+        <svg viewBox="0 0 100 100" style="width:44px;color:var(--yellow);filter:drop-shadow(2px 2px 0 #2A1C14)" class="pp-spin" aria-hidden="true"><use href="#i-sparkle"/></svg>
+        <p>Tag us to get featured</p>
+        <small>@pawsandpets · #PawsAndPets</small>
+      </div>
+      <figure class="pp-ig pp-ig--tall" tabindex="0" style="--rot:1.5deg;--oc:var(--orange)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&h=900&q=70" alt="Smiling dog close-up" width="600" height="900" loading="lazy" decoding="async" data-tone="cream">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Laddoo</strong><span>Tangerine Collar</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Laddoo's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>2.4k</b></button></figcaption>
+      </figure>
+      <figure class="pp-ig" tabindex="0" style="--rot:-1deg;--oc:var(--yellow)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=600&h=600&q=70" alt="Dog with tongue out, happy" width="600" height="600" loading="lazy" decoding="async" data-tone="teal">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Coco</strong><span>Polka Bandana</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Coco's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>613</b></button></figcaption>
+      </figure>
+      <figure class="pp-ig" tabindex="0" style="--rot:2.5deg;--oc:var(--teal)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=600&h=600&q=70" alt="Fluffy dog portrait" width="600" height="600" loading="lazy" decoding="async" data-tone="orange">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Mochi</strong><span>Bone Name Tag</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Mochi's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>1.8k</b></button></figcaption>
+      </figure>
+      <figure class="pp-ig pp-ig--wide" tabindex="0" style="--rot:-1deg;--oc:var(--cream)" data-reveal="clip" data-cursor="Double-tap ♡">
+        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&h=450&q=70" alt="Golden retriever posing in a collar" width="900" height="450" loading="lazy" decoding="async" data-tone="yellow">
+        <span class="pp-ig__tag" aria-hidden="true"><svg><use href="#i-paw"/></svg></span>
+        <figcaption class="pp-ig__over"><div><strong>Sunny</strong><span>Colour Pop Leash</span></div><button class="pp-like" type="button" aria-pressed="false" aria-label="Like Sunny's photo"><svg viewBox="0 0 100 100"><use href="#i-heart"/></svg><b>3.1k</b></button></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+</div><!-- /zone -->
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="pp-news" id="join" aria-labelledby="pp-news-title">
+  <div class="pp-news__blob" data-speed=".06" aria-hidden="true"></div>
+  <div class="pp-float" data-speed="-.2" style="left:6%;top:14%;width:clamp(60px,8vw,120px)" aria-hidden="true"><div class="pp-bob"><svg class="pp-spin" style="color:var(--orange);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-sparkle"/></svg></div></div>
+  <div class="pp-float" data-speed=".22" style="right:7%;top:20%;width:clamp(70px,9vw,140px)" aria-hidden="true"><div class="pp-bob" style="--bd:-2s"><svg style="color:var(--teal);--b:var(--paper);display:block;width:100%;height:auto;filter:drop-shadow(4px 5px 0 #2A1C14)" viewBox="0 0 124 96"><use href="#i-bandana"/></svg></div></div>
+  <div class="pp-float" data-speed="-.12" style="right:14%;bottom:12%;width:clamp(40px,5vw,72px)" aria-hidden="true"><svg style="color:var(--ink);opacity:.8;display:block;width:100%;height:auto;rotate:20deg" viewBox="0 0 100 100"><use href="#i-paw"/></svg></div>
+  <div class="pp-float" data-speed=".15" style="left:12%;bottom:14%;width:clamp(40px,5vw,72px)" aria-hidden="true"><svg style="color:var(--orange);display:block;width:100%;height:auto" viewBox="0 0 100 100"><use href="#i-heart-o"/></svg></div>
+
+  <div class="pp-wrap pp-news__inner">
+    <span class="pp-sticker pp-sticker--paper" data-reveal="pop" style="--rot:-3deg"><svg class="pp-icon" aria-hidden="true"><use href="#i-paw"/></svg> The pack list</span>
+    <h2 class="pp-h2" id="pp-news-title"><span data-split>Come join</span> <span class="pp-it" data-split style="--d:.2s">the pack.</span></h2>
+    <p class="pp-news__copy" data-reveal style="--d:.2s">First dibs on new drops, birthday treats for your dog (yes, really) and zero spam. Just good dog energy, straight to your inbox.</p>
+    <!-- Connect to Mailchimp / your WP form plugin by setting the form "action" and removing data-demo -->
+    <form class="pp-form" id="pp-form" novalidate data-demo data-reveal style="--d:.3s">
+      <div class="pp-form__peek" aria-hidden="true"><svg viewBox="0 0 130 130"><use href="#i-dog"/></svg></div>
+      <label class="pp-form__label" for="pp-email">Your email address</label>
+      <div class="pp-form__row">
+        <input id="pp-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Your email address" required aria-describedby="pp-form-msg">
+        <button class="pp-btn pp-btn--orange" type="submit"><span class="pp-btn__txt">I'm in →</span><span class="pp-btn__spin" aria-hidden="true"><svg><use href="#i-spinner"/></svg></span></button>
+      </div>
+      <p class="pp-form__msg" id="pp-form-msg" role="status" aria-live="polite"></p>
+      <p class="pp-form__small">Unsubscribe anytime. We'll be sad, but we'll understand.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="pp-foot">
+  <svg class="pp-foot__wave" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0h1440v20c-60 0-60 22-120 22S1260 20 1200 20s-60 22-120 22S1020 20 960 20s-60 22-120 22S780 20 720 20s-60 22-120 22S540 20 480 20s-60 22-120 22S300 20 240 20s-60 22-120 22S60 20 0 20z"/></svg>
+  <div class="pp-wrap">
+    <div class="pp-foot__grid">
+      <div class="pp-foot__brand">
+        <a class="pp-logo" href="#top" aria-label="Paws &amp; Pets, back to top"><span class="pp-logo__mark"><svg class="pp-icon" aria-hidden="true"><use href="#i-paw"/></svg></span><span>Paws<span class="pp-logo__amp">&amp;</span>Pets</span></a>
+        <p>Accessories with personality.</p>
+        <a class="pp-btn pp-btn--yellow" href="#collections" data-magnetic>Shop now <span class="pp-arrow" aria-hidden="true">→</span></a>
+      </div>
+      <nav aria-label="Shop"><h4>Explore</h4><ul><li><a href="#collections">Shop</a></li><li><a href="#collections">Collections</a></li><li><a href="#about">About</a></li><li><a href="#story">Our Story</a></li></ul></nav>
+      <nav aria-label="Help"><h4>Help</h4><ul><li><a href="/faqs/">FAQs</a></li><li><a href="/contact/">Contact</a></li><li><a href="/shipping-returns/">Shipping &amp; Returns</a></li><li><a href="/size-guide/">Size Guide</a></li></ul></nav>
+      <nav aria-label="Social"><h4>Social</h4><ul>
+        <li><a href="https://instagram.com/" target="_blank" rel="noopener"><svg class="pp-icon" aria-hidden="true"><use href="#i-ig"/></svg> Instagram</a></li>
+        <li><a href="https://tiktok.com/" target="_blank" rel="noopener"><svg class="pp-icon" aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a></li>
+        <li><a href="https://pinterest.com/" target="_blank" rel="noopener"><svg class="pp-icon" aria-hidden="true"><use href="#i-pin"/></svg> Pinterest</a></li>
+      </ul></nav>
+    </div>
+    <div class="pp-giant" id="pp-giant" aria-label="Paws &amp; Pets" role="img"></div>
+    <div class="pp-foot__bottom">
+      <span>© <span id="pp-year">2026</span> Paws &amp; Pets. All good dogs reserved.</span>
+      <span>Made for walks, zoomies &amp; showing off <svg class="pp-heart" aria-hidden="true"><use href="#i-heart"/></svg></span>
+    </div>
+  </div>
+  <div class="pp-float pp-foot__deco" data-speed="-.1" style="right:4%;top:70px;width:clamp(60px,7vw,110px)" aria-hidden="true"><div class="pp-bob"><svg style="color:var(--yellow);display:block;width:100%;height:auto" class="pp-spin" viewBox="0 0 100 100"><use href="#i-star"/></svg></div></div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="pp-scrim" data-close-cart></div>
+<aside class="pp-drawer" id="pp-cart" aria-label="Your cart" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="pp-drawer__head"><h2>Your pack</h2><button class="pp-iconbtn" type="button" aria-label="Close cart" data-close-cart><svg class="pp-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+  <div class="pp-drawer__body" id="pp-cart-body"></div>
+  <div class="pp-drawer__foot" id="pp-cart-foot" hidden>
+    <div class="pp-drawer__sub"><span>Subtotal</span><span id="pp-cart-total">0</span></div>
+    <a class="pp-btn pp-btn--orange" href="/checkout/">Checkout · Good choice <span class="pp-arrow" aria-hidden="true">→</span></a>
+  </div>
+</aside>
+<template id="pp-empty-tpl">
+  <div class="pp-empty">
+    <svg class="pp-empty__dog" viewBox="0 0 130 130" aria-hidden="true"><use href="#i-dog"/></svg>
+    <h3>Uh-oh. No paws<br>in here yet.</h3>
+    <p>Your cart's looking a little lonely. Let's find something that's very them.</p>
+    <a class="pp-btn pp-btn--yellow" href="#collections" data-close-cart>Pick their mood <span class="pp-arrow" aria-hidden="true">→</span></a>
+  </div>
+</template>
+
+<!-- ============ SEARCH ============ -->
+<div class="pp-search" id="pp-search" aria-hidden="true" role="dialog" aria-label="Search">
+  <button class="pp-iconbtn pp-search__close" type="button" aria-label="Close search" data-close-search><svg class="pp-icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+  <form action="/" method="get" role="search">
+    <label class="pp-sr" for="pp-s">Search Paws &amp; Pets</label>
+    <input id="pp-s" name="s" type="search" placeholder="Find their vibe…" autocomplete="off">
+    <input type="hidden" name="post_type" value="product">
+    <button class="pp-roundbtn" type="submit" aria-label="Search"><svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-arrow-s"/></svg></button>
+  </form>
+  <div class="pp-search__chips">
+    <a class="pp-sticker pp-sticker--paper" href="#collections" data-close-search style="--rot:-2deg">Collars</a>
+    <a class="pp-sticker pp-sticker--teal" href="#collections" data-close-search style="--rot:2deg">Bandanas</a>
+    <a class="pp-sticker pp-sticker--orange" href="#collections" data-close-search style="--rot:-1deg">Bow ties</a>
+    <a class="pp-sticker pp-sticker--paper" href="#collections" data-close-search style="--rot:3deg">Leashes</a>
+    <a class="pp-sticker pp-sticker--teal" href="#collections" data-close-search style="--rot:-3deg">Harnesses</a>
+    <a class="pp-sticker pp-sticker--cream" href="#collections" data-close-search style="--rot:1deg">Name tags</a>
+  </div>
+</div>
+
+<div class="pp-toast" id="pp-toast" role="status" aria-live="polite"><svg aria-hidden="true"><use href="#i-paw"/></svg><span>Added to the pack</span></div>
+<div class="pp-cursor" aria-hidden="true"><div class="pp-cursor__inner"><svg><use href="#i-paw"/></svg><span class="pp-cursor__label">Sniff</span></div></div>
+
+</div><!-- /.pp -->
+
+<script>
+(function () {
+  'use strict';
+  var PP_CURRENCY = '₹';           // change to '$', '£', '€' …
+  var root = document.documentElement;
+  var site = document.getElementById('pp-site');
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var vh = window.innerHeight, vw = window.innerWidth;
+
+  /* ---------- 1. Intro sequence ---------- */
+  function ready() { root.classList.add('pp-ready'); }
+  if (RM) ready();
+  else {
+    var started = false;
+    var go = function () { if (started) return; started = true; requestAnimationFrame(function () { setTimeout(ready, 350); }); };
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(go); setTimeout(go, 1600); }
+    else window.addEventListener('load', go);
+  }
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { $('.pp-curtain').classList.remove('is-leaving'); ready(); } });
+
+  /* ---------- 2. Page transition for links that leave this page ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || RM || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+    var href = a.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return;
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
+    e.preventDefault();
+    $('.pp-curtain').classList.add('is-leaving');
+    setTimeout(function () { location.href = a.href; }, 650);
+  });
+
+  /* ---------- 3. Split headings into words ---------- */
+  $$('[data-split]').forEach(function (el) {
+    var words = el.textContent.trim().split(/\s+/);
+    el.setAttribute('aria-label', el.textContent.trim());
+    el.innerHTML = words.map(function (w, i) { return '<span class="w" aria-hidden="true" style="--i:' + i + '">' + w + '</span>'; }).join(' ');
+  });
+
+  /* ---------- 4. Marquees: fill from templates ---------- */
+  function fillMarquee(el, tplId, copies) {
+    var tpl = document.getElementById(tplId); if (!tpl) return;
+    for (var i = 0; i < copies; i++) el.appendChild(tpl.content.cloneNode(true));
+  }
+  var tapes = $$('.pp-tapes .pp-marquee');
+  tapes.forEach(function (m) { fillMarquee(m, 'pp-tape-items', 4); });
+  var camp = $$('.pp-camp__line .pp-marquee');
+  if (camp[0]) fillMarquee(camp[0], 'pp-camp-a', 4);
+  if (camp[1]) fillMarquee(camp[1], 'pp-camp-b', 4);
+  var band = $('.pp-band .pp-marquee'); if (band) fillMarquee(band, 'pp-band-items', 6);
+  var marquees = $$('[data-marquee]').map(function (el) {
+    return { el: el, dir: +el.dataset.marquee, k: +(el.dataset.speed || .3), drift: +(el.dataset.drift || .4), half: 0, x: 0 };
+  });
+  function measureMarquees() { marquees.forEach(function (m) { m.half = m.el.scrollWidth / 2; }); }
+
+  /* ---------- 5. Footer giant letters ---------- */
+  var giant = $('#pp-giant');
+  if (giant) {
+    var txt = 'Paws&Pets', html = '', idx = 0;
+    txt.split('').forEach(function (ch) {
+      html += '<span aria-hidden="true" class="' + (ch === '&' ? 'amp' : '') + '" style="--i:' + (idx++) + '">' + (ch === '&' ? '&amp;' : ch) + '</span>';
+    });
+    giant.innerHTML = html;
+  }
+  var y = $('#pp-year'); if (y) y.textContent = new Date().getFullYear();
+
+  /* ---------- 6. Reveal on scroll + counters ---------- */
+  function countUp(el) {
+    var to = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null, dur = 1600;
+    if (RM || to === 0) { el.textContent = to + suf; return; }
+    function step(t) { if (!t0) t0 = t; var p = clamp((t - t0) / dur, 0, 1); var e = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(to * e) + suf; if (p < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('is-in');
+        $$('[data-count]', en.target).forEach(countUp);
+        io.unobserve(en.target);
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -6% 0px' });
+    $$('[data-reveal],[data-split],.pp-giant').forEach(function (el) { io.observe(el); });
+  } else { $$('[data-reveal],[data-split],.pp-giant').forEach(function (el) { el.classList.add('is-in'); }); }
+
+  /* ---------- 7. Background zone colour morph ---------- */
+  var zone = $('#pp-zone');
+  if (zone && 'IntersectionObserver' in window) {
+    var zio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) zone.style.backgroundColor = en.target.dataset.zone; });
+    }, { rootMargin: '-48% 0px -48% 0px' });
+    $$('[data-zone]').forEach(function (s) { zio.observe(s); });
+  }
+
+  /* ---------- 8. Nav: shrink, active link, mobile menu ---------- */
+  var nav = $('#pp-nav'), burger = $('.pp-burger'), menu = $('#pp-menu');
+  function setMenu(open) {
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) setTimeout(function () { var f = $('a', menu); f && f.focus(); }, 300);
+  }
+  burger.addEventListener('click', function () { setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  var navLinks = $$('.pp-nav__links a');
+  if ('IntersectionObserver' in window) {
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id && a.dataset.nav.indexOf('-2') === -1); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['about', 'story', 'collections', 'reviews'].forEach(function (id) { var s = document.getElementById(id); s && nio.observe(s); });
+  }
+
+  /* ---------- 9. Cart drawer + public API ---------- */
+  var cartEl = $('#pp-cart'), scrim = $('.pp-scrim'), body = $('#pp-cart-body'), foot = $('#pp-cart-foot');
+  var countEl = $('.pp-cartcount'), cartBtn = $('.pp-cartbtn'), toast = $('#pp-toast');
+  var items = [];
+  try { items = JSON.parse(localStorage.getItem('pp-cart') || '[]'); } catch (e) { items = []; }
+  var lastFocus = null;
+  function money(n) { return PP_CURRENCY + Number(n).toLocaleString(); }
+  function save() { try { localStorage.setItem('pp-cart', JSON.stringify(items)); } catch (e) {} }
+  function render(animateId) {
+    var n = items.reduce(function (s, it) { return s + it.qty; }, 0);
+    countEl.textContent = n;
+    countEl.classList.toggle('has-items', n > 0);
+    cartBtn.setAttribute('aria-label', 'Open cart, ' + n + ' item' + (n === 1 ? '' : 's'));
+    if (!items.length) { body.innerHTML = ''; body.appendChild($('#pp-empty-tpl').content.cloneNode(true)); foot.hidden = true; return; }
+    body.innerHTML = items.map(function (it) {
+      return '<div class="pp-citem" data-id="' + it.id + '"' + (animateId && animateId !== it.id ? ' style="animation:none"' : '') + '>' +
+        '<img src="' + (it.img || ppFallback('yellow')) + '" alt="" data-tone="yellow">' +
+        '<div><strong>' + it.name + '</strong><span>' + money(it.price) + '</span><br>' +
+        '<span class="pp-qty"><button type="button" data-qty="-1" aria-label="Decrease quantity">−</button><span>' + it.qty + '</span><button type="button" data-qty="1" aria-label="Increase quantity">+</button></span></div>' +
+        '<button type="button" class="pp-citem__rm" data-rm>Remove</button></div>';
+    }).join('');
+    $('#pp-cart-total').textContent = money(items.reduce(function (s, it) { return s + it.price * it.qty; }, 0));
+    foot.hidden = false;
+  }
+  function openCart() { lastFocus = document.activeElement; cartEl.classList.add('is-open'); scrim.classList.add('is-open'); cartEl.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; setTimeout(function () { $('[data-close-cart]', cartEl).focus(); }, 100); }
+  function closeCart() { cartEl.classList.remove('is-open'); scrim.classList.remove('is-open'); cartEl.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; lastFocus && lastFocus.focus && lastFocus.focus(); }
+  function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
+  function showToast(msg) { $('span', toast).textContent = msg; toast.classList.add('is-show'); clearTimeout(showToast.t); showToast.t = setTimeout(function () { toast.classList.remove('is-show'); }, 2200); }
+  function flyToCart(srcImg, cb) {
+    if (RM || !srcImg) return cb();
+    var r = srcImg.getBoundingClientRect(), t = cartBtn.getBoundingClientRect();
+    var f = document.createElement('img'); f.src = srcImg.currentSrc || srcImg.src; f.className = 'pp-flyer';
+    var s = Math.min(r.width, r.height, 120);
+    f.style.cssText = 'left:' + (r.left + r.width / 2 - s / 2) + 'px;top:' + (r.top + r.height / 2 - s / 2) + 'px;width:' + s + 'px;height:' + s + 'px';
+    site.appendChild(f);
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      f.style.transform = 'translate(' + (t.left + t.width / 2 - (r.left + r.width / 2)) + 'px,' + (t.top + t.height / 2 - (r.top + r.height / 2)) + 'px) scale(.15) rotate(360deg)';
+      f.style.opacity = '.6';
+    }); });
+    setTimeout(function () { f.remove(); cb(); }, 820);
+  }
+  function add(item, srcImg, btn) {
+    item = item || {};
+    var id = item.id || (item.name || 'item').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    var done = function () {
+      var ex = items.filter(function (i) { return i.id === id; })[0];
+      if (ex) ex.qty += (item.qty || 1);
+      else items.push({ id: id, name: item.name || 'Something good', price: +item.price || 0, img: item.img || '', qty: item.qty || 1 });
+      save(); render(id); bump(cartBtn); bump(countEl); showToast('Added to the pack 🐾');
+      if (btn) { var o = btn.innerHTML; btn.innerHTML = 'Added to the pack 🐾'; btn.disabled = true; setTimeout(function () { btn.innerHTML = o; btn.disabled = false; }, 1800); }
+    };
+    flyToCart(srcImg, done);
+  }
+  body.addEventListener('click', function (e) {
+    var row = e.target.closest('.pp-citem'); if (!row) return;
+    var it = items.filter(function (i) { return i.id === row.dataset.id; })[0]; if (!it) return;
+    if (e.target.closest('[data-qty]')) { it.qty += +e.target.closest('[data-qty]').dataset.qty; if (it.qty < 1) items.splice(items.indexOf(it), 1); }
+    if (e.target.closest('[data-rm]')) items.splice(items.indexOf(it), 1);
+    save(); render('none');
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-open-cart]')) { e.preventDefault(); openCart(); }
+    if (e.target.closest('[data-close-cart]')) closeCart();
+    var b = e.target.closest('[data-add-to-cart]');
+    if (b) {
+      e.preventDefault();
+      var card = b.closest('[data-product]') || b.parentElement;
+      add({ id: b.dataset.id, name: b.dataset.name, price: b.dataset.price, img: b.dataset.img }, card && card.querySelector('img'), b);
+    }
+  });
+  render();
+  window.PawsCart = { add: function (item) { add(item); }, open: openCart, close: closeCart, items: function () { return items.slice(); }, clear: function () { items = []; save(); render(); } };
+
+  /* ---------- 10. Search overlay ---------- */
+  var search = $('#pp-search');
+  function openSearch() { if (menu.classList.contains('is-open')) setMenu(false); search.classList.add('is-open'); search.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('#pp-s').focus(); }, 350); }
+  function closeSearch() { search.classList.remove('is-open'); search.setAttribute('aria-hidden', 'true'); }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-open-search]')) openSearch();
+    if (e.target.closest('[data-close-search]')) closeSearch();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (cartEl.classList.contains('is-open')) closeCart();
+    if (search.classList.contains('is-open')) closeSearch();
+    if (menu.classList.contains('is-open')) { setMenu(false); burger.focus(); }
+  });
+
+  /* ---------- 11. Testimonials track: drag, buttons, progress ---------- */
+  var track = $('#pp-track'), tbar = $('.pp-trackbar span');
+  if (track) {
+    var step = function () { var c = $('.pp-review', track); return c ? c.getBoundingClientRect().width + 28 : 360; };
+    $('[data-track-next]').addEventListener('click', function () { track.scrollBy({ left: step(), behavior: RM ? 'auto' : 'smooth' }); });
+    $('[data-track-prev]').addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: RM ? 'auto' : 'smooth' }); });
+    var updBar = function () {
+      var max = track.scrollWidth - track.clientWidth, w = clamp(track.clientWidth / track.scrollWidth, .12, 1);
+      tbar.style.setProperty('--tw', (w * 100) + '%');
+      tbar.style.setProperty('--tp', (max > 0 ? (track.scrollLeft / max) * ((1 - w) / w) * 100 : 0) + '%');
+    };
+    track.addEventListener('scroll', updBar, { passive: true }); updBar();
+    var down = false, sx = 0, sl = 0, moved = false;
+    track.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; });
+    window.addEventListener('pointermove', function (e) { if (!down) return; var dx = e.clientX - sx; if (Math.abs(dx) > 4) { moved = true; track.classList.add('is-dragging'); } track.scrollLeft = sl - dx; });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; track.classList.remove('is-dragging'); });
+    track.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') track.scrollBy({ left: step(), behavior: 'smooth' }); if (e.key === 'ArrowLeft') track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  }
+
+  /* ---------- 12. Social grid: tap to reveal, double-tap to like ---------- */
+  function heartPop(tile) {
+    if (RM) return;
+    var h = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    h.setAttribute('class', 'pp-ig__heart'); h.setAttribute('viewBox', '0 0 100 100'); h.innerHTML = '<use href="#i-heart"/>';
+    tile.appendChild(h); setTimeout(function () { h.remove(); }, 1000);
+  }
+  function setLike(btn, on) {
+    if (!btn) return;
+    var was = btn.getAttribute('aria-pressed') === 'true'; if (was === on) return;
+    btn.setAttribute('aria-pressed', on);
+    var b = $('b', btn), raw = b.textContent, n = raw.indexOf('k') > -1 ? parseFloat(raw) * 1000 : parseInt(raw, 10);
+    n += on ? 1 : -1; b.textContent = n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n;
+  }
+  $$('.pp-ig:not(.pp-ig--note)').forEach(function (tile) {
+    var last = 0, btn = $('.pp-like', tile);
+    tile.addEventListener('click', function (e) {
+      if (e.target.closest('.pp-like')) { var on = btn.getAttribute('aria-pressed') !== 'true'; setLike(btn, on); if (on) heartPop(tile); return; }
+      var now = Date.now();
+      if (now - last < 320) { setLike(btn, true); heartPop(tile); }
+      else if (!FINE) { $$('.pp-ig.is-active').forEach(function (t) { if (t !== tile) t.classList.remove('is-active'); }); tile.classList.toggle('is-active'); }
+      last = now;
+    });
+    tile.addEventListener('keydown', function (e) { if (e.key === 'Enter') { setLike(btn, true); heartPop(tile); } });
+  });
+
+  /* ---------- 13. Newsletter ---------- */
+  var form = $('#pp-form');
+  function burst(x, y, n) {
+    if (RM) return;
+    var shapes = ['i-paw', 'i-starflat', 'i-heart', 'i-sparkle'], cols = ['#EC802B', '#EDC558', '#66BCB4', '#FBF4EC'];
+    for (var i = 0; i < n; i++) {
+      var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('class', 'pp-burst'); s.setAttribute('viewBox', '0 0 100 100');
+      s.innerHTML = '<use href="#' + shapes[i % shapes.length] + '"/>';
+      var ang = (Math.PI * 2 * i) / n + Math.random() * .5, dist = 90 + Math.random() * 110;
+      s.style.cssText = 'left:' + x + 'px;top:' + y + 'px;color:' + cols[i % cols.length] + ';--bx:' + Math.cos(ang) * dist + 'px;--by:' + (Math.sin(ang) * dist - 40) + 'px;--brot:' + (Math.random() * 360 - 180) + 'deg;animation-delay:' + (Math.random() * .12) + 's;width:' + (18 + Math.random() * 18) + 'px;height:auto';
+      site.appendChild(s); (function (el) { setTimeout(function () { el.remove(); }, 1400); })(s);
+    }
+  }
+  if (form) {
+    var msg = $('#pp-form-msg'), input = $('#pp-email'), fbtn = $('button[type="submit"]', form);
+    form.addEventListener('submit', function (e) {
+      var v = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+        e.preventDefault();
+        msg.className = 'pp-form__msg is-err'; msg.textContent = 'Hmm, that email looks a bit ruff. Mind checking it?';
+        input.setAttribute('aria-invalid', 'true'); input.focus(); return;
+      }
+      input.removeAttribute('aria-invalid');
+      if (!form.hasAttribute('data-demo')) return; // real form: let it submit
+      e.preventDefault();
+      form.classList.add('is-loading'); msg.textContent = '';
+      setTimeout(function () {
+        form.classList.remove('is-loading'); form.classList.add('is-done');
+        $('.pp-btn__txt', fbtn).textContent = 'Woof!';
+        var r = fbtn.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 16);
+        msg.className = 'pp-form__msg is-ok'; msg.textContent = "You're on the list 🐾";
+        input.value = ''; input.placeholder = 'See you in your inbox';
+      }, 850);
+    });
+  }
+
+  /* ---------- 14. Story: horizontal pinned scroll on desktop ---------- */
+  var story = $('#story'), sTrack = $('.pp-story__track'), sBar = $('.pp-story__bar');
+  var pinned = false;
+  function setupStory() {
+    var want = !RM && window.innerWidth >= 1000;
+    story.classList.toggle('is-pinned', want); pinned = want;
+    if (want) { story.style.height = (sTrack.scrollWidth - window.innerWidth + window.innerHeight) + 'px'; }
+    else { story.style.height = ''; sTrack.style.transform = ''; }
+  }
+
+  /* ---------- 15. Pointer: hero depth, tilt, magnetic, cursor ---------- */
+  var mouse = { x: vw / 2, y: vh / 2, nx: 0, ny: 0 }, sm = { nx: 0, ny: 0 };
+  var depthEls = $$('.pp-hero [data-depth]'), heroPhoto = $('.pp-hero__photo');
+  var cursor = $('.pp-cursor'), cLabel = $('.pp-cursor__label'), cur = { x: -200, y: -200 }, curOn = false;
+  if (FINE && !RM) {
+    window.addEventListener('pointermove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.nx = e.clientX / vw * 2 - 1; mouse.ny = e.clientY / vh * 2 - 1; }, { passive: true });
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target.closest('[data-cursor]');
+      if (t && !e.target.closest('a.pp-btn,button')) { cLabel.textContent = t.dataset.cursor; cursor.classList.add('is-on'); curOn = true; }
+      else { cursor.classList.remove('is-on'); curOn = false; }
+    });
+    document.addEventListener('pointerleave', function () { cursor.classList.remove('is-on'); });
+    /* tilt cards */
+    $$('[data-tilt]').forEach(function (card) {
+      var img = $('.pp-cat__img', card);
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+        card.style.setProperty('--ry', (px * 8) + 'deg'); card.style.setProperty('--rx', (-py * 8) + 'deg');
+        if (img) { img.style.setProperty('--ix', (px * -16) + 'px'); img.style.setProperty('--iy', (py * -16) + 'px'); }
+      });
+      card.addEventListener('pointerleave', function () { card.style.setProperty('--ry', '0deg'); card.style.setProperty('--rx', '0deg'); if (img) { img.style.setProperty('--ix', '0px'); img.style.setProperty('--iy', '0px'); } });
+    });
+    /* magnetic buttons */
+    $$('[data-magnetic]').forEach(function (b) {
+      b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); b.style.setProperty('--tx', ((e.clientX - r.left - r.width / 2) * .22) + 'px'); b.style.setProperty('--ty', ((e.clientY - r.top - r.height / 2) * .3) + 'px'); });
+      b.addEventListener('pointerleave', function () { b.style.setProperty('--tx', '0px'); b.style.setProperty('--ty', '0px'); });
+    });
+  }
+  /* hero click -> paw stamp */
+  var hero = $('.pp-hero');
+  hero.addEventListener('click', function (e) {
+    if (RM || e.target.closest('a,button')) return;
+    var r = hero.getBoundingClientRect();
+    var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('class', 'pp-stamp'); s.setAttribute('viewBox', '0 0 100 100'); s.innerHTML = '<use href="#i-paw"/>';
+    s.style.left = (e.clientX - r.left) + 'px'; s.style.top = (e.clientY - r.top) + 'px';
+    s.style.setProperty('--sr', (Math.random() * 60 - 30) + 'deg');
+    s.style.color = ['#EC802B', '#66BCB4', '#EDC558'][Math.floor(Math.random() * 3)];
+    hero.appendChild(s); setTimeout(function () { s.remove(); }, 1400);
+  });
+
+  /* ---------- 16. Scroll-linked loop (parallax, marquees, story, progress, paw trail) ---------- */
+  var parEls = $$('[data-speed]:not([data-marquee])').map(function (el) { return { el: el, k: +el.dataset.speed, sec: el.closest('section,footer') || el.parentElement }; });
+  var panelImgs = $$('.pp-panel__img img');
+  var campFig = $('.pp-camp__dog figure');
+  var progress = $('.pp-progress__bar');
+  var drift = 0, lastT = performance.now(), lastY = window.scrollY, trailAcc = 0, trailSide = 0;
+  var trailOK = FINE && !RM && window.innerWidth > 1200;
+
+  function trail(dy) {
+    trailAcc += Math.abs(dy);
+    if (trailAcc < 240) return; trailAcc = 0;
+    var p = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    p.setAttribute('class', 'pp-trail-paw'); p.setAttribute('viewBox', '0 0 100 100'); p.innerHTML = '<use href="#i-paw"/>';
+    trailSide = 1 - trailSide;
+    var x = trailSide ? 14 : 34; var down = dy > 0;
+    p.style.left = x + 'px'; p.style.top = (down ? vh * .62 : vh * .32) + (trailSide ? 0 : 18) + 'px';
+    p.style.setProperty('--pr', down ? '180deg' : '0deg');
+    p.style.opacity = '.25';
+    site.appendChild(p); setTimeout(function () { p.remove(); }, 2300);
+  }
+
+  function frame(t) {
+    var dt = Math.min(64, t - lastT); lastT = t;
+    var sy = window.scrollY;
+    /* nav + progress */
+    nav.classList.toggle('is-scrolled', sy > 40);
+    var docH = document.documentElement.scrollHeight - vh;
+    progress.style.setProperty('--p', docH > 0 ? (sy / docH).toFixed(4) : 0);
+    if (trailOK && sy !== lastY) trail(sy - lastY);
+    lastY = sy;
+
+    if (!RM) {
+      /* marquees */
+      drift += dt * .04;
+      marquees.forEach(function (m) {
+        if (!m.half) return;
+        var r = m.el.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
+        var off = (drift * m.drift * 4 + sy * m.k) % m.half;
+        var x = m.dir < 0 ? -off : -m.half + off;
+        m.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)';
+      });
+      /* parallax */
+      parEls.forEach(function (p) {
+        var r = p.sec.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+        var c = (r.top + r.height / 2 - vh / 2);
+        p.el.style.setProperty('--py', (c * p.k * -1).toFixed(1) + 'px');
+      });
+      /* hero pointer depth (smoothed) */
+      if (FINE) {
+        sm.nx = lerp(sm.nx, mouse.nx, .07); sm.ny = lerp(sm.ny, mouse.ny, .07);
+        depthEls.forEach(function (el) { var d = +el.dataset.depth; el.style.setProperty('--mx', (sm.nx * d).toFixed(2) + 'px'); el.style.setProperty('--my', (sm.ny * d).toFixed(2) + 'px'); });
+        if (heroPhoto) { heroPhoto.style.setProperty('--ix', (sm.nx * -10).toFixed(2) + 'px'); heroPhoto.style.setProperty('--iy', (sm.ny * -10).toFixed(2) + 'px'); }
+        cur.x = lerp(cur.x, mouse.x, .22); cur.y = lerp(cur.y, mouse.y, .22);
+        cursor.style.setProperty('--cx', cur.x.toFixed(1) + 'px'); cursor.style.setProperty('--cy', cur.y.toFixed(1) + 'px');
+      }
+      /* campaign dog spins with scroll */
+      if (campFig) { var cr = campFig.getBoundingClientRect(); if (cr.bottom > 0 && cr.top < vh) campFig.style.setProperty('--camprot', ((cr.top - vh / 2) * .05).toFixed(2) + 'deg'); }
+      /* story pin */
+      if (pinned) {
+        var sr = story.getBoundingClientRect(), total = story.offsetHeight - vh;
+        var prog = clamp(-sr.top / total, 0, 1);
+        var maxX = sTrack.scrollWidth - window.innerWidth;
+        sTrack.style.transform = 'translate3d(' + (-prog * maxX).toFixed(1) + 'px,0,0)';
+        sBar.style.setProperty('--sp', prog.toFixed(4));
+        panelImgs.forEach(function (img) { var ir = img.parentElement.getBoundingClientRect(); img.style.setProperty('--imgx', ((ir.left + ir.width / 2 - vw / 2) * -.06).toFixed(1) + 'px'); });
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function onResize() {
+    vh = window.innerHeight; vw = window.innerWidth;
+    trailOK = FINE && !RM && vw > 1200;
+    measureMarquees(); setupStory();
+  }
+  var rT; window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(onResize, 120); });
+  onResize();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
+  window.addEventListener('load', onResize);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
